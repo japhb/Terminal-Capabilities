@@ -1,5 +1,4 @@
-unit class Terminal::Capabilities;
-
+# ABSTRACT: Terminal capability and font repertoire data
 
 =begin pod
 
@@ -68,6 +67,56 @@ uniformly supported by modern terminals than various color and style attributes
 that were "standardized" decades earlier.  Thus C<color8bit> is by default
 C<True>, while C<colorbright> and C<italic> are by default C<False>.
 
+=end pod
+
+
+#| A container for the available capabilities of a particular terminal
+unit class Terminal::Capabilities;
+
+
+# Known symbol sets in superset order
+enum SymbolSet < ASCII Latin1 CP1252 W1G WGL4 MES2 Uni1 Uni7 Full >;
+
+
+#| Determine the correct SymbolSet enumerant for a possibly mis-cased string
+sub symbol-set(Str:D $set = 'Full' --> SymbolSet:D) is export {
+    constant %sets = SymbolSet.^enum_value_list.map({ .Str.fc => $_ });
+    %sets{$set.fc} // ASCII
+}
+
+
+#| Largest supported symbol repertoire
+has SymbolSet:D $.symbol-set = ASCII;
+
+#| Supports VT100 box drawing glyphs (nearly universal, but only *required* by WGL4)
+has Bool $.vt100-boxes = $!symbol-set >= WGL4;
+
+# Feature flags, with defaults based on majority of Terminal::Tests
+# screenshot submissions (True iff universally supported or nearly so)
+has Bool $.bold        = True;   #= Supports bold attribute
+has Bool $.italic      = False;  #= Supports italic attribute
+has Bool $.inverse     = True;   #= Supports inverse attribute
+has Bool $.underline   = True;   #= Supports underline attribute
+
+has Bool $.color3bit   = True;   #= Supports original paletted 3-bit color
+has Bool $.colorbright = False;  #= Supports bright foregrounds for 3-bit palette
+has Bool $.color8bit   = True;   #= Supports 6x6x6 color cube + 24-value grayscale
+has Bool $.color24bit  = False;  #= Supports 24-bit RGB color
+
+
+#| Find best symbol set supported by this terminal from a list of choices
+method best-symbol-set(@sets --> SymbolSet:D) {
+    @sets.map({ SymbolSet::{$_} // ASCII })
+         .grep(* <= $.symbol-set).max
+}
+
+#| Choose the best choice out of options keyed by required symbol set
+method best-symbol-choice(%options) {
+    %options{self.best-symbol-set(%options.keys)}
+}
+
+
+=begin pod
 
 =head1 AUTHOR
 

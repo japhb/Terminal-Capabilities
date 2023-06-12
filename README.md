@@ -51,6 +51,49 @@ This module does **NOT** do any auto-detection, merely serving as a standard for
 
 One quirk of this method of determining defaults is that 8-bit color is more uniformly supported by modern terminals than various color and style attributes that were "standardized" decades earlier. Thus `color8bit` is by default `True`, while `colorbright` and `italic` are by default `False`.
 
+class Terminal::Capabilities
+----------------------------
+
+A container for the available capabilities of a particular terminal
+
+### sub symbol-set
+
+```raku
+sub symbol-set(
+    Str:D $set = "Full"
+) returns SymbolSet:D
+```
+
+Determine the correct SymbolSet enumerant for a possibly mis-cased string
+
+### has SymbolSet:D $.symbol-set
+
+Largest supported symbol repertoire
+
+### has Bool $.vt100-boxes
+
+Supports VT100 box drawing glyphs (nearly universal, but only *required* by WGL4)
+
+### method best-symbol-set
+
+```raku
+method best-symbol-set(
+    @sets
+) returns SymbolSet:D
+```
+
+Find best symbol set supported by this terminal from a list of choices
+
+### method best-symbol-choice
+
+```raku
+method best-symbol-choice(
+    %options
+) returns Mu
+```
+
+Choose the best choice out of options keyed by required symbol set
+
 AUTHOR
 ======
 
