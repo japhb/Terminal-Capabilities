@@ -1,0 +1,21 @@
+use Test;
+
+use Terminal::Capabilities;
+
+
+my $max = -1;
+for < ASCII Latin1 CP1252 W1G WGL4 MES2 Uni1 Uni7 Full > {
+    my $enum = Terminal::Capabilities::SymbolSet::{$_};
+    ok $enum.defined, "$_ is a valid SymbolSet enumerant";
+    ok $enum > $max,  "$_ is sorted correctly";
+    $max = $enum;
+
+    my $self  = symbol-set($_);
+    my $upper = symbol-set(.uc);
+    my $lower = symbol-set(.lc);
+    my $title = symbol-set(.tc);
+    ok ([==] $self, $upper, $lower, $title), "symbol-set handles $_ case variants";
+}
+
+
+done-testing;

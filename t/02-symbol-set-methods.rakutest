@@ -1,0 +1,37 @@
+use Test;
+
+use Terminal::Capabilities;
+
+
+# Defaults
+my $caps = Terminal::Capabilities.new;
+isa-ok $caps, Terminal::Capabilities:D;
+isa-ok $caps.symbol-set, Terminal::Capabilities::SymbolSet:D;
+is $caps.symbol-set, Terminal::Capabilities::SymbolSet::ASCII, "ASCII is default symbol-set";
+is $caps.best-symbol-set(< ASCII Latin1 WGL4 Uni7 >),
+   Terminal::Capabilities::SymbolSet::ASCII, "best-symbol-set limited by actual symbol-set";
+
+# Override
+my $symbol-set = symbol-set('wgl4');
+$caps = Terminal::Capabilities.new(:$symbol-set);
+isa-ok $caps, Terminal::Capabilities:D;
+isa-ok $caps.symbol-set, Terminal::Capabilities::SymbolSet:D;
+is $caps.symbol-set, Terminal::Capabilities::SymbolSet::WGL4, "symbol-set set to WGL4";
+is $caps.best-symbol-set(< ASCII Latin1 WGL4 Uni7 >),
+   Terminal::Capabilities::SymbolSet::WGL4, "best-symbol-set may have exact match";
+is $caps.best-symbol-set(< ASCII Latin1 W1G Uni7 >),
+   Terminal::Capabilities::SymbolSet::W1G, "best-symbol-set may not have exact match";
+is $caps.best-symbol-set(< ASCII Latin1 CP1252 >),
+   Terminal::Capabilities::SymbolSet::CP1252, "best-symbol-set may be last available";
+
+# Choosing from hash keys
+my %arrows = ASCII  => « < > »,
+             Latin1 => < « » >,
+             WGL4   => < ◄ ► >,
+             Uni1   => < ◀ ▶ >,
+             Uni7   => < ⯇ ⯈ >;
+my $best = $caps.best-symbol-choice(%arrows);
+is-deeply $best, < ◄ ► >, "best-symbol-choice picked the best choice";
+
+
+done-testing;

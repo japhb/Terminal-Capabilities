@@ -1,0 +1,32 @@
+use Test;
+
+use Terminal::Capabilities;
+
+
+# Default defaults
+my $caps = Terminal::Capabilities.new;
+is $caps.symbol-set,  Terminal::Capabilities::SymbolSet::ASCII;
+is $caps.vt100-boxes, False;
+
+
+# Defaults for specific character set
+for Terminal::Capabilities::SymbolSet.^enum_value_list -> $symbol-set {
+    # vt100-boxes default depends on symbol-set
+    my $caps = Terminal::Capabilities.new(:$symbol-set);
+    is $caps.symbol-set,  $symbol-set;
+    is $caps.vt100-boxes, $symbol-set >= Terminal::Capabilities::SymbolSet::WGL4;
+
+    # Other capabilities have fixed defaults
+    is $caps.bold,        True;
+    is $caps.italic,      False;
+    is $caps.inverse,     True;
+    is $caps.underline,   True;
+
+    is $caps.color3bit,   True;
+    is $caps.colorbright, False;
+    is $caps.color8bit,   True;
+    is $caps.color24bit,  False;
+}
+
+
+done-testing;
