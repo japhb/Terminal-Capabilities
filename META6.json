@@ -7,7 +7,7 @@
   ],
   "depends": [
   ],
-  "description": "blah blah blah",
+  "description": "Container for terminal capabilities, with useful defaults",
   "license": "Artistic-2.0",
   "name": "Terminal::Capabilities",
   "perl": "6.d",
