@@ -1,6 +1,10 @@
+use v6.d;
 use Test;
+
 use Terminal::Capabilities;
 
-pass "replace me";
+
+pass "all modules loaded successfully";
+
 
 done-testing;
