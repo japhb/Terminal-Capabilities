@@ -26,7 +26,7 @@ my $symbol-set = Terminal::Capabilities::SymbolSet::Uni1;
 my $caps       = Terminal::Capabilities.new(:$symbol-set);
 
 # Symbol set affects default for other features
-say $caps.vt100-boxes;  # True, because WGL4 and all larger sets require it
+say $caps.vt100-boxes;  # True, because WGL4R and all larger sets require it
 
 # Determine best available symbol set supported by terminal out of a list
 say $caps.best-symbol-set(< ASCII WGL4 MES2 Uni7 >);  # MES2, best <= Uni1
@@ -74,7 +74,7 @@ Largest supported symbol repertoire
 
 ### has Bool $.vt100-boxes
 
-Supports VT100 box drawing glyphs (nearly universal, but only *required* by WGL4)
+Supports VT100 box drawing glyphs (nearly universal, but only *required* by WGL4R)
 
 ### method best-symbol-set
 
