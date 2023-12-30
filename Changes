@@ -1,6 +1,9 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  - Add support for WGL4R (R = "Required") subset of WGL4
+  - (Minimally) document known symbol sets
+
 
 0.0.1  2023-06-11T19:41:13-07:00
   - Initial version, adapted from Terminal::Widgets::TerminalCapabilities
