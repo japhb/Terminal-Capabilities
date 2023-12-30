@@ -67,6 +67,28 @@ uniformly supported by modern terminals than various color and style attributes
 that were "standardized" decades earlier.  Thus C<color8bit> is by default
 C<True>, while C<colorbright> and C<italic> are by default C<False>.
 
+=head2 Known Symbol Sets
+
+In superset order, from smallest to largest:
+
+    ASCII    7-bit ASCII printables only (most compatible)
+    Latin1   Latin-1 / ISO-8859-1
+    CP1252   CP1252 / Windows-1252
+    W1G      W1G-compatible subset of WGL4R
+    WGL4R    Required (non-optional) WGL4 glyphs
+    WGL4     Full WGL4 / Windows Glyph List 4
+    MES2     MES-2 / Multilingual European Subset No. 2
+    Uni1     Unicode 1.1
+    Uni7     Unicode 7.0 + Emoji 0.7
+    Full     Full modern Unicode support (most features)
+
+The difference between C<WGL4R> and full C<WGL4> is that the latter includes 18
+additional symbol and drawing glyphs needed for full compatibility with CP437,
+the code page (glyph set) used in IBM PC-compatible video ROMs and thus all DOS
+programs.  As these 18 are considered optional in the WGL4 spec, C<WGL4R>
+allows specifying only the symbols I<required> by WGL4, and thus guaranteed to
+work in any terminal font with at least minimal WGL4 compatibility.
+
 =end pod
 
 
