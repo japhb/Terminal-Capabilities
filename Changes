@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  - Update test missed in WGL4R support changes
+
 
 0.0.2  2023-12-29T19:10:59-08:00
   - Add support for WGL4R (R = "Required") subset of WGL4
