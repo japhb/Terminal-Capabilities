@@ -2,6 +2,7 @@ use v6.d;
 use Test;
 
 use Terminal::Capabilities;
+use Terminal::Capabilities::Autodetect;
 
 
 pass "all modules loaded successfully";

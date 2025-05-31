@@ -12,7 +12,8 @@
   "name": "Terminal::Capabilities",
   "perl": "6.d",
   "provides": {
-    "Terminal::Capabilities": "lib/Terminal/Capabilities.rakumod"
+    "Terminal::Capabilities": "lib/Terminal/Capabilities.rakumod",
+    "Terminal::Capabilities::Autodetect": "lib/Terminal/Capabilities/Autodetect.rakumod"
   },
   "resources": [
   ],
