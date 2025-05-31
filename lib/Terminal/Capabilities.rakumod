@@ -125,6 +125,13 @@ has Bool $.colorbright = False;  #= Supports bright foregrounds for 3-bit palett
 has Bool $.color8bit   = True;   #= Supports 6x6x6 color cube + 24-value grayscale
 has Bool $.color24bit  = False;  #= Supports 24-bit RGB color
 
+has Bool $.emoji-text  = False;  #= Supports text outline emoji (VS15)
+has Bool $.emoji-color = False;  #= Supports color emoji (VS16)
+has Bool $.emoji-skin  = False;  #= Supports skin tones for faces and people
+has Bool $.emoji-iso   = False;  #= Supports emoji flags for ISO country codes
+has Bool $.emoji-reg   = False;  #= Supports emoji flags for region codes
+has Bool $.emoji-zwj   = False;  #= Supports combined emoji via joining (ZWJ)
+
 
 #| Find best symbol set supported by this terminal from a list of choices
 method best-symbol-set(@sets --> SymbolSet:D) {
@@ -147,7 +154,7 @@ Geoffrey Broadwell <gjb@sonic.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2023 Geoffrey Broadwell
+Copyright 2023,2025 Geoffrey Broadwell
 
 This library is free software; you can redistribute it and/or modify it under
 the Artistic License 2.0.

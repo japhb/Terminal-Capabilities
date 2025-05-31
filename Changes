@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  - Add T::C attributes tracking support of various emoji features
+
 
 0.0.3  2023-12-29T19:39:04-08:00
   - Update test missed in WGL4R support changes
