@@ -88,8 +88,14 @@ sub terminal-env-detect() is export {
                 $emoji-text   = True;
             }
             elsif $prog eq 'iTerm.app' {
-                $color24bit ||= ($version // '').split('.')[0] >= 3;
+                $italic       = True;
                 $color8bit    = True;
+                $color24bit ||= ($version // '').split('.')[0] >= 3;
+                $emoji-color  = True;
+                $emoji-skin   = True;
+                $emoji-iso    = True;
+                $emoji-reg    = True;
+                $emoji-zwj    = True;
             }
             elsif $prog eq 'Apple_Terminal' {
                 $color8bit    = True;
