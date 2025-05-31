@@ -96,14 +96,14 @@ There are sets for classic ANSI attributes, color support, and emoji handling:
 
 =begin table
     Attribute    | Supported Feature
-    =============|======================================
+    =============|========================================
     .bold        | ANSI/VT100 bold attribute
     .italic      | ANSI/VT100 italic attribute
     .inverse     | ANSI/VT100 inverse attribute
     .underline   | ANSI/VT100 underline attribute
     .color3bit   | Original paletted 3-bit color
     .colorbright | Bright variants of 3-bit palette
-    .color8bit   | 6x6x6 color cube + 24-value grayscale
+    .color8bit   | 6x6x6 color cube and 24-value grayscale
     .color24bit  | 24-bit RGB color
     .emoji-text  | Text outline emoji (VS15)
     .emoji-color | Color emoji (VS16)
