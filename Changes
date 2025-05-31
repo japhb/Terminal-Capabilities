@@ -8,8 +8,8 @@ Revision history for Terminal-Capabilities
 
   [Docs]
   - Add README table explaining feature flag attributes
-  - Document ::Autodetect module use in README and clarify main module use
-
+  - Document ::Autodetect module use in README
+  - Various bits of README cleanup and clarification
 
 0.0.3  2023-12-29T19:39:04-08:00
   - Update test missed in WGL4R support changes
