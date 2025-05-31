@@ -59,7 +59,7 @@ The `Terminal::Capabilities::Autodetect` child module provides routines for auto
 
 ```raku
 use Terminal::Capabilities::Autodetect;
-my ($autocaps, $terminal, $version) = terminal-env-detect;
+my ($caps, $type, $version) = terminal-env-detect;
 ```
 
 Conversely, the core `Terminal::Capabilities` module does **not** do any autodetection, merely serving as a standard for collecting capabilities detected or configured through other means. That said, there are reasonable defaults for each of the capability flags based on the collected submissions to the `Terminal::Tests` project. The default values represent the capabilities that are universally supported (or nearly so -- there are a few truly deeply broken terminals for which nearly *nothing* works properly which are considered out of scope for the defaults).
@@ -71,16 +71,14 @@ Known Symbol Sets
 
 In superset order, from smallest to largest:
 
-    ASCII    7-bit ASCII printables only (most compatible)
-    Latin1   Latin-1 / ISO-8859-1
-    CP1252   CP1252 / Windows-1252
-    W1G      W1G-compatible subset of WGL4R
-    WGL4R    Required (non-optional) WGL4 glyphs
-    WGL4     Full WGL4 / Windows Glyph List 4
-    MES2     MES-2 / Multilingual European Subset No. 2
-    Uni1     Unicode 1.1
-    Uni7     Unicode 7.0 + Emoji 0.7
-    Full     Full modern Unicode support (most features)
+<table class="pod-table">
+<thead><tr>
+<th>Symbol Set</th> <th>Contents</th> <th></th>
+</tr></thead>
+<tbody>
+<tr> <td>ASCII</td> <td>7-bit ASCII printables only (most compatible)</td> <td></td> </tr> <tr> <td>Latin1</td> <td>Latin-1 / ISO-8859-1</td> <td></td> </tr> <tr> <td>CP1252</td> <td>CP1252 / Windows-1252</td> <td></td> </tr> <tr> <td>W1G</td> <td>W1G-compatible subset of WGL4R</td> <td></td> </tr> <tr> <td>WGL4R</td> <td>Required (non-optional) WGL4 glyphs</td> <td></td> </tr> <tr> <td>WGL4</td> <td>Full WGL4 / Windows Glyph List 4</td> <td></td> </tr> <tr> <td>MES2</td> <td>MES-2 / Multilingual European Subset No. 2</td> <td></td> </tr> <tr> <td>Uni1</td> <td>Unicode 1.1</td> <td></td> </tr> <tr> <td>Uni7</td> <td>Unicode 7.0</td> <td>Emoji 0.7</td> </tr> <tr> <td>Full</td> <td>Full modern Unicode support (most features)</td> <td></td> </tr>
+</tbody>
+</table>
 
 The difference between `WGL4R` and full `WGL4` is that the latter includes 18 additional symbol and drawing glyphs needed for full compatibility with CP437, the code page (glyph set) used in IBM PC-compatible video ROMs and thus all DOS programs. As these 18 are considered optional in the WGL4 spec, `WGL4R` allows specifying only the symbols *required* by WGL4, and thus guaranteed to work in any terminal font with at least minimal WGL4 compatibility.
 

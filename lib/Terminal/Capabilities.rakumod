@@ -72,7 +72,7 @@ terminal program version if available:
 =begin code :lang<raku>
 
 use Terminal::Capabilities::Autodetect;
-my ($autocaps, $terminal, $version) = terminal-env-detect;
+my ($caps, $type, $version) = terminal-env-detect;
 
 =end code
 
@@ -94,16 +94,20 @@ C<True>, while C<colorbright> and C<italic> are by default C<False>.
 
 In superset order, from smallest to largest:
 
-    ASCII    7-bit ASCII printables only (most compatible)
-    Latin1   Latin-1 / ISO-8859-1
-    CP1252   CP1252 / Windows-1252
-    W1G      W1G-compatible subset of WGL4R
-    WGL4R    Required (non-optional) WGL4 glyphs
-    WGL4     Full WGL4 / Windows Glyph List 4
-    MES2     MES-2 / Multilingual European Subset No. 2
-    Uni1     Unicode 1.1
-    Uni7     Unicode 7.0 + Emoji 0.7
-    Full     Full modern Unicode support (most features)
+=begin table
+    Symbol Set | Contents
+    ===========|=========
+    ASCII      | 7-bit ASCII printables only (most compatible)
+    Latin1     | Latin-1 / ISO-8859-1
+    CP1252     | CP1252 / Windows-1252
+    W1G        | W1G-compatible subset of WGL4R
+    WGL4R      | Required (non-optional) WGL4 glyphs
+    WGL4       | Full WGL4 / Windows Glyph List 4
+    MES2       | MES-2 / Multilingual European Subset No. 2
+    Uni1       | Unicode 1.1
+    Uni7       | Unicode 7.0 + Emoji 0.7
+    Full       | Full modern Unicode support (most features)
+=end table
 
 The difference between C<WGL4R> and full C<WGL4> is that the latter includes 18
 additional symbol and drawing glyphs needed for full compatibility with CP437,
