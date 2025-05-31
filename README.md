@@ -10,10 +10,16 @@ SYNOPSIS
 
 ```raku
 use Terminal::Capabilities;
+use Terminal::Capabilities::Autodetect;
 
-# Create a terminal capabilities object with default settings based on the most
+# Autodetect terminal and its capabilities via examination of terminal-related
+# environment variables.  This does not touch the process table or run any
+# subprocesses, so it should be quick and safe.
+my ($autocaps, $terminal, $version) = terminal-env-detect;
+
+# Create a terminal capabilities object with DEFAULT settings based on the most
 # commonly well-supported capabilities, as determined by submissions to the
-# Terminal::Tests project.
+# Terminal::Tests project.  This method does NO AUTODECTION.
 my Terminal::Capabilities $caps .= new;
 
 # Examine individual capabilities
@@ -49,7 +55,14 @@ DESCRIPTION
 
 Terminal::Capabilities is a relatively simple module that collects information about the capabilities of *modern* terminals (it assumes *at least* the ASCII character set, and ANSI/DEC VT style control sequence emulation).
 
-This module does **NOT** do any auto-detection, merely serving as a standard for collecting capabilities detected or configured through other means. That said, there are reasonable defaults for each of the capability flags based on the collected submissions to the `Terminal::Tests` project. The default values represent the capabilities that are universally supported (or nearly so -- there are a few truly deeply broken terminals for which nearly *nothing* works properly which are considered out of scope for the defaults).
+The `Terminal::Capabilities::Autodetect` child module provides routines for autodetecting the user's terminal and its capabilities. The first such routine *only* examines environment variables, thus avoiding creating subprocesses, performing asynchronous queries to the terminal emulator, or mucking about in the user's process table. Simply call the `terminal-env-detect` routine to obtain a pre-populated `Terminal::Capabilities` object with the autodetection's best guesses, along with the terminal type detected and terminal program version if available:
+
+```raku
+use Terminal::Capabilities::Autodetect;
+my ($autocaps, $terminal, $version) = terminal-env-detect;
+```
+
+Conversely, the core `Terminal::Capabilities` module does **not** do any autodetection, merely serving as a standard for collecting capabilities detected or configured through other means. That said, there are reasonable defaults for each of the capability flags based on the collected submissions to the `Terminal::Tests` project. The default values represent the capabilities that are universally supported (or nearly so -- there are a few truly deeply broken terminals for which nearly *nothing* works properly which are considered out of scope for the defaults).
 
 One quirk of this method of determining defaults is that 8-bit color is more uniformly supported by modern terminals than various color and style attributes that were "standardized" decades earlier. Thus `color8bit` is by default `True`, while `colorbright` and `italic` are by default `False`.
 
