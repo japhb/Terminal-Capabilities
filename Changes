@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.4  2025-05-30T20:53:23-07:00
   [Features]
   - Add T::C attributes tracking support of various emoji features
   - Add initial support for environment-based autodetection
