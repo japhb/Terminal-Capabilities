@@ -3,6 +3,8 @@ Revision history for Terminal-Capabilities
 {{$NEXT}}
   - Add T::C attributes tracking support of various emoji features
   - Add README table explaining feature flag attributes
+  - Add initial support for environment-based autodetection
+  - Add `terminal-autodetect` script to show results of autodetection logic
 
 
 0.0.3  2023-12-29T19:39:04-08:00

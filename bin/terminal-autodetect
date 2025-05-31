@@ -1,0 +1,14 @@
+#!/usr/bin/env raku
+use Terminal::Capabilities::Autodetect;
+
+my ($caps, $terminal, $version) = terminal-env-detect;
+put "Terminal: {$terminal // 'unknown'}";
+put "Version:  {$version  // 'unknown'}";
+put 'Caps:';
+
+for < symbol-set vt100-boxes bold italic inverse underline
+      color3bit colorbright color8bit color24bit
+      emoji-text emoji-color emoji-skin
+      emoji-iso emoji-reg emoji-zwj > {
+    printf "  %-11s  %s\n", $_, $caps."$_"();
+}
