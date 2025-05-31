@@ -105,7 +105,7 @@ In superset order, from smallest to largest:
     WGL4       | Full WGL4 / Windows Glyph List 4
     MES2       | MES-2 / Multilingual European Subset No. 2
     Uni1       | Unicode 1.1
-    Uni7       | Unicode 7.0 + Emoji 0.7
+    Uni7       | Unicode 7.0 and Emoji 0.7
     Full       | Full modern Unicode support (most features)
 =end table
 
