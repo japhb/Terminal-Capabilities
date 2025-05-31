@@ -71,6 +71,20 @@ In superset order, from smallest to largest:
 
 The difference between `WGL4R` and full `WGL4` is that the latter includes 18 additional symbol and drawing glyphs needed for full compatibility with CP437, the code page (glyph set) used in IBM PC-compatible video ROMs and thus all DOS programs. As these 18 are considered optional in the WGL4 spec, `WGL4R` allows specifying only the symbols *required* by WGL4, and thus guaranteed to work in any terminal font with at least minimal WGL4 compatibility.
 
+Known Feature Flags
+-------------------
+
+Several sets of flag (Bool) attributes indicate support for various features. There are sets for classic ANSI attributes, color support, and emoji handling:
+
+<table class="pod-table">
+<thead><tr>
+<th>Attribute</th> <th>Supported Feature</th> <th></th>
+</tr></thead>
+<tbody>
+<tr> <td>.bold</td> <td>ANSI/VT100 bold attribute</td> <td></td> </tr> <tr> <td>.italic</td> <td>ANSI/VT100 italic attribute</td> <td></td> </tr> <tr> <td>.inverse</td> <td>ANSI/VT100 inverse attribute</td> <td></td> </tr> <tr> <td>.underline</td> <td>ANSI/VT100 underline attribute</td> <td></td> </tr> <tr> <td>.color3bit</td> <td>Original paletted 3-bit color</td> <td></td> </tr> <tr> <td>.colorbright</td> <td>Bright variants of 3-bit palette</td> <td></td> </tr> <tr> <td>.color8bit</td> <td>6x6x6 color cube</td> <td>24-value grayscale</td> </tr> <tr> <td>.color24bit</td> <td>24-bit RGB color</td> <td></td> </tr> <tr> <td>.emoji-text</td> <td>Text outline emoji (VS15)</td> <td></td> </tr> <tr> <td>.emoji-color</td> <td>Color emoji (VS16)</td> <td></td> </tr> <tr> <td>.emoji-skin</td> <td>Skin tones for faces and people</td> <td></td> </tr> <tr> <td>.emoji-iso</td> <td>Emoji flags for ISO country codes</td> <td></td> </tr> <tr> <td>.emoji-reg</td> <td>Emoji flags for region codes</td> <td></td> </tr> <tr> <td>.emoji-zwj</td> <td>Emoji combinations via joining (ZWJ)</td> <td></td> </tr>
+</tbody>
+</table>
+
 class Terminal::Capabilities
 ----------------------------
 

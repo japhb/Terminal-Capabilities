@@ -89,6 +89,30 @@ programs.  As these 18 are considered optional in the WGL4 spec, C<WGL4R>
 allows specifying only the symbols I<required> by WGL4, and thus guaranteed to
 work in any terminal font with at least minimal WGL4 compatibility.
 
+=head2 Known Feature Flags
+
+Several sets of flag (Bool) attributes indicate support for various features.
+There are sets for classic ANSI attributes, color support, and emoji handling:
+
+=begin table
+    Attribute    | Supported Feature
+    =============|======================================
+    .bold        | ANSI/VT100 bold attribute
+    .italic      | ANSI/VT100 italic attribute
+    .inverse     | ANSI/VT100 inverse attribute
+    .underline   | ANSI/VT100 underline attribute
+    .color3bit   | Original paletted 3-bit color
+    .colorbright | Bright variants of 3-bit palette
+    .color8bit   | 6x6x6 color cube + 24-value grayscale
+    .color24bit  | 24-bit RGB color
+    .emoji-text  | Text outline emoji (VS15)
+    .emoji-color | Color emoji (VS16)
+    .emoji-skin  | Skin tones for faces and people
+    .emoji-iso   | Emoji flags for ISO country codes
+    .emoji-reg   | Emoji flags for region codes
+    .emoji-zwj   | Emoji combinations via joining (ZWJ)
+=end table
+
 =end pod
 
 
