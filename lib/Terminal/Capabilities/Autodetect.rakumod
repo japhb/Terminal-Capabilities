@@ -87,6 +87,17 @@ sub terminal-env-detect() is export {
                 $color8bit    = True;
                 $emoji-text   = True;
             }
+            elsif $prog eq 'ghostty' {
+                # Ghostty sets COLORTERM=truecolor, detected above
+
+                $italic       = True;
+                $emoji-text   = True;
+                $emoji-color  = True;
+                $emoji-skin   = True;
+                $emoji-iso    = True;
+                $emoji-reg    = True;
+                $emoji-zwj    = True;
+            }
             elsif $prog eq 'iTerm.app' {
                 $italic       = True;
                 $color8bit    = True;
@@ -161,6 +172,22 @@ sub terminal-env-detect() is export {
         $color3bit   = True;
         $colorbright = True;
         $color8bit   = True;
+    }
+    elsif ?$term.starts-with('tmux') {
+        $terminal    = 'tmux';
+        $version     = %*ENV<TERM_PROGRAM_VERSION>;
+
+        # XXXX: Limited by symbol-set of underlying terminal emulator too
+        $symbol-set  = symbol-set('Full') if $has-utf8;
+
+        # XXXX: Detection of underlying terminal emulator to AND with these?
+        $italic      = True;
+        $emoji-text  = True;
+        $emoji-color = True;
+        $emoji-skin  = True;
+        $emoji-iso   = True;
+        $emoji-reg   = False;
+        $emoji-zwj   = False;
     }
     elsif ?$term.starts-with('screen'|'vt220'|'vt420')
        || ?$term.lc.contains('color'|'ansi'|'cygwin'|'linux') {

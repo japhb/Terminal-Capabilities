@@ -1,6 +1,10 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Features]
+  - Add autodetection support for Ghostty
+  - Add initial autodection support for tmux (but not yet the underlying terminal)
+
 
 0.0.5  2025-10-05T19:57:11-07:00
   [Features]
