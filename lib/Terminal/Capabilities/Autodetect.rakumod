@@ -89,7 +89,7 @@ sub terminal-env-detect() is export {
             }
             elsif $prog eq 'ghostty' {
                 # Ghostty sets COLORTERM=truecolor, detected above
-
+                $symbol-set   = symbol-set('Full') if $has-utf8;
                 $italic       = True;
                 $emoji-text   = True;
                 $emoji-color  = True;
