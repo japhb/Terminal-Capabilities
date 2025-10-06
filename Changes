@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.7  2025-10-06T00:24:02-07:00
   [Bug Fix]
   - Ghostty supports the Full symbol-set
 
