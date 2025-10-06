@@ -1,6 +1,10 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Features]
+  - Support --show-env option in `terminal-autodetect` to show values of all
+    known terminal-related environment variables
+
 
 0.0.4  2025-05-30T20:53:23-07:00
   [Features]
@@ -12,6 +16,7 @@ Revision history for Terminal-Capabilities
   - Add README table explaining feature flag attributes
   - Document ::Autodetect module use in README
   - Various bits of README cleanup and clarification
+
 
 0.0.3  2023-12-29T19:39:04-08:00
   - Update test missed in WGL4R support changes

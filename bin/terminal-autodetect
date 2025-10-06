@@ -1,14 +1,52 @@
 #!/usr/bin/env raku
 use Terminal::Capabilities::Autodetect;
 
-my ($caps, $terminal, $version) = terminal-env-detect;
-put "Terminal: {$terminal // 'unknown'}";
-put "Version:  {$version  // 'unknown'}";
-put 'Caps:';
+constant BOLD_YELLOW = "\e[1;33m";
+constant RESET       = "\e[0m";
 
-for < symbol-set vt100-boxes bold italic inverse underline
-      color3bit colorbright color8bit color24bit
-      emoji-text emoji-color emoji-skin
-      emoji-iso emoji-reg emoji-zwj > {
-    printf "  %-11s  %s\n", $_, $caps."$_"();
+# Display a section of detected environment variables
+sub section($section, @vars) {
+    put BOLD_YELLOW ~ $section ~ RESET;
+    printf("%-22s  %s\n", $_, %*ENV{$_} // '') for @vars;
+    put '';
+}
+
+
+# Show current values of all known terminal-related environment variables
+sub show-env() {
+    section('General',     < LANG TERM COLORTERM COLORFGBG >);
+    section('Alacritty',   < ALACRITTY_WINDOW_ID ALACRITTY_LOG ALACRITTY_SOCKET >);
+    section('CRT',         < COLORSCHEMES_DIR KB_LAYOUT_DIR >);
+    section('kitty',       < KITTY_WINDOW_ID KITTY_PID KITTY_PUBLIC_KEY KITTY_INSTALLATION_DIR >);
+    section('Konsole',     < KONSOLE_DBUS_SERVICE KONSOLE_DBUS_SESSION KONSOLE_DBUS_WINDOW >);
+    section('Misc',        < TERM_PROGRAM TERM_PROGRAM_VERSION >);
+    section('MLTerm',      [ 'MLTERM', ]);
+    section('Qt',          < D_DISABLE_RT_SCREEN_SCALE QT_SCALE_FACTOR_ROUNDING_POLICY >);
+    section('Terminator',  < TERMINATOR_DBUS_NAME TERMINATOR_DBUS_PATH TERMINATOR_UUID >);
+    section('Terminology', < TERMINOLOGY XTERM_256_COLORS >);
+    section('Zutty',       [ 'ZUTTY_VERSION', ]);
+    section('VTE',         < VTE_VERSION TILIX_ID GNOME_TERMINAL_SERVICE GNOME_TERMINAL_SCREEN >);
+    section('Xterm',       < XTERM_VERSION XTERM_SHELL XTERM_LOCALE >);
+}
+
+
+#| Show autodetected terminal capabilities
+sub MAIN(Bool :$show-env,  #= Show known terminal-related environment values also
+        ) {
+    if $show-env {
+        show-env;
+        put BOLD_YELLOW ~ 'Detected' ~ RESET;
+    }
+
+    my ($caps, $terminal, $version) = terminal-env-detect;
+    put "Terminal: {$terminal // 'unknown'}";
+    put "Version:  {$version  // 'unknown'}";
+    put 'Caps:';
+
+    for < symbol-set vt100-boxes bold italic inverse underline
+          color3bit  colorbright color8bit color24bit
+          emoji-text emoji-color emoji-skin
+          emoji-iso  emoji-reg   emoji-zwj > {
+        printf "  %-11s  %s\n", $_, $caps."$_"();
+    }
 }
