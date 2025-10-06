@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.5  2025-10-05T19:57:11-07:00
   [Features]
   - Support --show-env option in `terminal-autodetect` to show values of all
     known terminal-related environment variables
