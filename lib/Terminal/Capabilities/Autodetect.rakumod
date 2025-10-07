@@ -177,19 +177,41 @@ sub terminal-env-detect() is export {
         $terminal    = 'tmux';
         $version     = %*ENV<TERM_PROGRAM_VERSION>;
 
-        # XXXX: Limited by symbol-set of underlying terminal emulator too
-        $symbol-set  = symbol-set('Full') if $has-utf8;
-
-        # XXXX: Detection of underlying terminal emulator to AND with these?
-        $italic      = True;
-        $emoji-text  = True;
-        $emoji-color = True;
-        $emoji-skin  = True;
-        $emoji-iso   = True;
+        # tmux breaks these, regardless of underlying terminal
+        $color24bit  = False;
         $emoji-reg   = False;
         $emoji-zwj   = False;
+
+        # Try to recurse to detect underlying terminal's capabilities
+        temp %*ENV<TERM> = $term eq 'tmux-256color' ?? 'xterm-256color' !! 'xterm';
+        my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
+
+        my $caps   = $under-caps.clone(:$color24bit, :$emoji-reg, :$emoji-zwj);
+        $terminal ~= ' on ' ~ $under-terminal;
+        $terminal ~= ' version ' ~ $under-version if $under-version;
+
+        return ($caps, $terminal, $version);
     }
-    elsif ?$term.starts-with('screen'|'vt220'|'vt420')
+    elsif ?$term.starts-with('screen') {
+        $terminal    = 'screen';
+
+        # Screen breaks these, regardless of underlying terminal
+        $italic      = False;
+        $color24bit  = False;
+
+        # Try to recurse to detect underlying terminal's capabilities
+        if $term ~~ /^ 'screen.' (.+) $/ {
+            temp %*ENV<TERM> = ~$0;
+            my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
+
+            my $caps   = $under-caps.clone(:$italic, :$color24bit);
+            $terminal ~= ' on ' ~ $under-terminal;
+            $terminal ~= ' version ' ~ $under-version if $under-version;
+
+            return ($caps, $terminal, $version);
+        }
+    }
+    elsif ?$term.starts-with('vt220'|'vt420')
        || ?$term.lc.contains('color'|'ansi'|'cygwin'|'linux') {
         $terminal    = $term;
         $color3bit   = True;

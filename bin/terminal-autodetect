@@ -22,6 +22,7 @@ sub show-env() {
     section('Konsole',     < KONSOLE_DBUS_SERVICE KONSOLE_DBUS_SESSION KONSOLE_DBUS_WINDOW >);
     section('MLTerm',      [ 'MLTERM', ]);
     section('Qt',          < D_DISABLE_RT_SCREEN_SCALE QT_SCALE_FACTOR_ROUNDING_POLICY >);
+    section('screen',      < STY WINDOW TERMCAP >);
     section('Terminator',  < TERMINATOR_DBUS_NAME TERMINATOR_DBUS_PATH TERMINATOR_UUID >);
     section('Terminology', < TERMINOLOGY XTERM_256_COLORS >);
     section('tmux',        < TMUX TMUX_PANE >);
