@@ -31,6 +31,66 @@ sub terminal-env-detect() is export {
     my Bool:D $emoji-reg   = False;
     my Bool:D $emoji-zwj   = False;
 
+    # Detect terminal multiplexers and recurse for underlying terminal
+    if %*ENV<ZELLIJ>.defined {
+        $terminal    = 'zellij';
+
+        # Zellij breaks these, regardless of underlying terminal
+        $emoji-text  = False;
+        $emoji-reg   = False;
+        $emoji-zwj   = False;
+
+        # Try to recurse to detect underlying terminal's capabilities
+        temp %*ENV;
+        %*ENV<ZELLIJ>:delete;
+        my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
+
+        my $caps   = $under-caps.clone(:$emoji-text, :$emoji-reg, :$emoji-zwj);
+        $terminal ~= ' on ' ~ $under-terminal;
+        $terminal ~= ' version ' ~ $under-version if $under-version;
+
+        return ($caps, $terminal, $version);
+    }
+    elsif ?$term.starts-with('tmux') {
+        $terminal    = 'tmux';
+        $version     = %*ENV<TERM_PROGRAM_VERSION>;
+
+        # tmux breaks these, regardless of underlying terminal
+        $color24bit  = False;
+        $emoji-reg   = False;
+        $emoji-zwj   = False;
+
+        # Try to recurse to detect underlying terminal's capabilities
+        temp %*ENV<TERM> = $term eq 'tmux-256color' ?? 'xterm-256color' !! 'xterm';
+        my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
+
+        my $caps   = $under-caps.clone(:$color24bit, :$emoji-reg, :$emoji-zwj);
+        $terminal ~= ' on ' ~ $under-terminal;
+        $terminal ~= ' version ' ~ $under-version if $under-version;
+
+        return ($caps, $terminal, $version);
+    }
+    elsif ?$term.starts-with('screen') {
+        $terminal    = 'screen';
+
+        # Screen breaks these, regardless of underlying terminal
+        $italic      = False;
+        $color24bit  = False;
+
+        # Try to recurse to detect underlying terminal's capabilities
+        if $term ~~ /^ 'screen.' (.+) $/ {
+            temp %*ENV<TERM> = ~$0;
+            my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
+
+            my $caps   = $under-caps.clone(:$italic, :$color24bit);
+            $terminal ~= ' on ' ~ $under-terminal;
+            $terminal ~= ' version ' ~ $under-version if $under-version;
+
+            return ($caps, $terminal, $version);
+        }
+    }
+
+    # Detect actual terminal emulators
     my $xtermish = $term.starts-with('xterm');
     if $xtermish {
         $vt100-boxes = True;
@@ -172,44 +232,6 @@ sub terminal-env-detect() is export {
         $color3bit   = True;
         $colorbright = True;
         $color8bit   = True;
-    }
-    elsif ?$term.starts-with('tmux') {
-        $terminal    = 'tmux';
-        $version     = %*ENV<TERM_PROGRAM_VERSION>;
-
-        # tmux breaks these, regardless of underlying terminal
-        $color24bit  = False;
-        $emoji-reg   = False;
-        $emoji-zwj   = False;
-
-        # Try to recurse to detect underlying terminal's capabilities
-        temp %*ENV<TERM> = $term eq 'tmux-256color' ?? 'xterm-256color' !! 'xterm';
-        my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
-
-        my $caps   = $under-caps.clone(:$color24bit, :$emoji-reg, :$emoji-zwj);
-        $terminal ~= ' on ' ~ $under-terminal;
-        $terminal ~= ' version ' ~ $under-version if $under-version;
-
-        return ($caps, $terminal, $version);
-    }
-    elsif ?$term.starts-with('screen') {
-        $terminal    = 'screen';
-
-        # Screen breaks these, regardless of underlying terminal
-        $italic      = False;
-        $color24bit  = False;
-
-        # Try to recurse to detect underlying terminal's capabilities
-        if $term ~~ /^ 'screen.' (.+) $/ {
-            temp %*ENV<TERM> = ~$0;
-            my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
-
-            my $caps   = $under-caps.clone(:$italic, :$color24bit);
-            $terminal ~= ' on ' ~ $under-terminal;
-            $terminal ~= ' version ' ~ $under-version if $under-version;
-
-            return ($caps, $terminal, $version);
-        }
     }
     elsif ?$term.starts-with('vt220'|'vt420')
        || ?$term.lc.contains('color'|'ansi'|'cygwin'|'linux') {

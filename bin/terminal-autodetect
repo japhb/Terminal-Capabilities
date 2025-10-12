@@ -26,9 +26,10 @@ sub show-env() {
     section('Terminator',  < TERMINATOR_DBUS_NAME TERMINATOR_DBUS_PATH TERMINATOR_UUID >);
     section('Terminology', < TERMINOLOGY XTERM_256_COLORS >);
     section('tmux',        < TMUX TMUX_PANE >);
-    section('Zutty',       [ 'ZUTTY_VERSION', ]);
     section('VTE',         < VTE_VERSION TILIX_ID GNOME_TERMINAL_SERVICE GNOME_TERMINAL_SCREEN >);
     section('Xterm',       < XTERM_VERSION XTERM_SHELL XTERM_LOCALE >);
+    section('Zellij',      < ZELLIJ ZELLIJ_PANE_ID ZELLIJ_SESSION_NAME >);
+    section('Zutty',       [ 'ZUTTY_VERSION', ]);
 }
 
 
