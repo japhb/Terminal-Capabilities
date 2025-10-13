@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.9  2025-10-12T17:18:22-07:00
   [Features]
   - Add support for Zellij multiplexer
 
