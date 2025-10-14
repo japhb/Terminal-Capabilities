@@ -1,6 +1,9 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Features]
+  - Support Uni3 (= Unicode 3.2) as a separate SymbolSet
+
 
 0.0.9  2025-10-12T17:18:22-07:00
   [Features]

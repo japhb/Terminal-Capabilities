@@ -76,7 +76,7 @@ In superset order, from smallest to largest:
 <th>Symbol Set</th> <th>Contents</th>
 </tr></thead>
 <tbody>
-<tr> <td>ASCII</td> <td>7-bit ASCII printables only (most compatible)</td> </tr> <tr> <td>Latin1</td> <td>Latin-1 / ISO-8859-1</td> </tr> <tr> <td>CP1252</td> <td>CP1252 / Windows-1252</td> </tr> <tr> <td>W1G</td> <td>W1G-compatible subset of WGL4R</td> </tr> <tr> <td>WGL4R</td> <td>Required (non-optional) WGL4 glyphs</td> </tr> <tr> <td>WGL4</td> <td>Full WGL4 / Windows Glyph List 4</td> </tr> <tr> <td>MES2</td> <td>MES-2 / Multilingual European Subset No. 2</td> </tr> <tr> <td>Uni1</td> <td>Unicode 1.1</td> </tr> <tr> <td>Uni7</td> <td>Unicode 7.0 and Emoji 0.7</td> </tr> <tr> <td>Full</td> <td>Full modern Unicode support (most features)</td> </tr>
+<tr> <td>ASCII</td> <td>7-bit ASCII printables only (most compatible)</td> </tr> <tr> <td>Latin1</td> <td>Latin-1 / ISO-8859-1</td> </tr> <tr> <td>CP1252</td> <td>CP1252 / Windows-1252</td> </tr> <tr> <td>W1G</td> <td>W1G-compatible subset of WGL4R</td> </tr> <tr> <td>WGL4R</td> <td>Required (non-optional) WGL4 glyphs</td> </tr> <tr> <td>WGL4</td> <td>Full WGL4 / Windows Glyph List 4</td> </tr> <tr> <td>MES2</td> <td>MES-2 / Multilingual European Subset No. 2</td> </tr> <tr> <td>Uni1</td> <td>Unicode 1.1</td> </tr> <tr> <td>Uni3</td> <td>Unicode 3.2</td> </tr> <tr> <td>Uni7</td> <td>Unicode 7.0 and Emoji 0.7</td> </tr> <tr> <td>Full</td> <td>Full modern Unicode support (most features)</td> </tr>
 </tbody>
 </table>
 

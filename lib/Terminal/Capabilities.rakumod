@@ -105,6 +105,7 @@ In superset order, from smallest to largest:
     WGL4       | Full WGL4 / Windows Glyph List 4
     MES2       | MES-2 / Multilingual European Subset No. 2
     Uni1       | Unicode 1.1
+    Uni3       | Unicode 3.2
     Uni7       | Unicode 7.0 and Emoji 0.7
     Full       | Full modern Unicode support (most features)
 =end table
@@ -147,8 +148,10 @@ There are sets for classic ANSI attributes, color support, and emoji handling:
 unit class Terminal::Capabilities;
 
 
-# Known symbol sets in superset order
-enum SymbolSet < ASCII Latin1 CP1252 W1G WGL4R WGL4 MES2 Uni1 Uni7 Full >;
+# Known symbol sets in superset order, smallest to largest
+# Note: Unicode 2.x intentionally skipped as only 4 general symbol codepoints
+#       were added outside the Hangul, Tibetan, and Hebrew scripts (the 2.x focus)
+enum SymbolSet < ASCII Latin1 CP1252 W1G WGL4R WGL4 MES2 Uni1 Uni3 Uni7 Full >;
 
 
 #| Determine the correct SymbolSet enumerant for a possibly mis-cased string
