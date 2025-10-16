@@ -85,14 +85,14 @@ The difference between `WGL4R` and full `WGL4` is that the latter includes 18 ad
 Known Feature Flags
 -------------------
 
-Several sets of flag (Bool) attributes indicate support for various features. There are sets for classic ANSI attributes, color support, and emoji handling:
+Several sets of flag (Bool) attributes indicate support for various features. There are sets for classic ANSI attributes, color support, emoji handling, and drawing symbols (often generated internally by the terminal emulator):
 
 <table class="pod-table">
 <thead><tr>
 <th>Attribute</th> <th>Supported Feature</th>
 </tr></thead>
 <tbody>
-<tr> <td>.bold</td> <td>ANSI/VT100 bold attribute</td> </tr> <tr> <td>.italic</td> <td>ANSI/VT100 italic attribute</td> </tr> <tr> <td>.inverse</td> <td>ANSI/VT100 inverse attribute</td> </tr> <tr> <td>.underline</td> <td>ANSI/VT100 underline attribute</td> </tr> <tr> <td>.color3bit</td> <td>Original paletted 3-bit color</td> </tr> <tr> <td>.colorbright</td> <td>Bright variants of 3-bit palette</td> </tr> <tr> <td>.color8bit</td> <td>6x6x6 color cube and 24-value grayscale</td> </tr> <tr> <td>.color24bit</td> <td>24-bit RGB color</td> </tr> <tr> <td>.emoji-text</td> <td>Text outline emoji (VS15)</td> </tr> <tr> <td>.emoji-color</td> <td>Color emoji (VS16)</td> </tr> <tr> <td>.emoji-skin</td> <td>Skin tones for faces and people</td> </tr> <tr> <td>.emoji-iso</td> <td>Emoji flags for ISO country codes</td> </tr> <tr> <td>.emoji-reg</td> <td>Emoji flags for region codes</td> </tr> <tr> <td>.emoji-zwj</td> <td>Emoji combinations via joining (ZWJ)</td> </tr>
+<tr> <td>.bold</td> <td>ANSI/VT100 bold attribute</td> </tr> <tr> <td>.italic</td> <td>ANSI/VT100 italic attribute</td> </tr> <tr> <td>.inverse</td> <td>ANSI/VT100 inverse attribute</td> </tr> <tr> <td>.underline</td> <td>ANSI/VT100 underline attribute</td> </tr> <tr> <td>.color3bit</td> <td>Original paletted 3-bit color</td> </tr> <tr> <td>.colorbright</td> <td>Bright variants of 3-bit palette</td> </tr> <tr> <td>.color8bit</td> <td>6x6x6 color cube and 24-value grayscale</td> </tr> <tr> <td>.color24bit</td> <td>24-bit RGB color</td> </tr> <tr> <td>.emoji-text</td> <td>Text outline emoji (VS15)</td> </tr> <tr> <td>.emoji-color</td> <td>Color emoji (VS16)</td> </tr> <tr> <td>.emoji-skin</td> <td>Skin tones for faces and people</td> </tr> <tr> <td>.emoji-iso</td> <td>Emoji flags for ISO country codes</td> </tr> <tr> <td>.emoji-reg</td> <td>Emoji flags for region codes</td> </tr> <tr> <td>.emoji-zwj</td> <td>Emoji combinations via joining (ZWJ)</td> </tr> <tr> <td>.vt100-boxes</td> <td>Original VT100 box drawing glyphs</td> </tr> <tr> <td>.half-blocks</td> <td>Top/bottom half-cell 1x2 blocks</td> </tr> <tr> <td>.quadrants</td> <td>Quadrant 2x2 blocks</td> </tr> <tr> <td>.sextants</td> <td>Sextant 2x3 blocks</td> </tr> <tr> <td>.octants</td> <td>Octant 2x4 blocks</td> </tr> <tr> <td>.sep-quadrants</td> <td>Separated quadrant 2x2 blocks</td> </tr> <tr> <td>.sep-sextants</td> <td>Separated sextant 2x3 blocks</td> </tr> <tr> <td>.braille</td> <td>Braille/separated octant 2x4 glyphs</td> </tr>
 </tbody>
 </table>
 
@@ -118,6 +118,34 @@ Largest supported symbol repertoire
 ### has Bool $.vt100-boxes
 
 Supports VT100 box drawing glyphs (nearly universal, but only *required* by WGL4R)
+
+### has Bool $.half-blocks
+
+Supports half-block 1x2 glyphs (partially supported in WGL4R, but not fully until WGL4)
+
+### has Bool $.braille
+
+Supports Braille glyphs (~ separated 2x4 octants, added in Unicode 3.0)
+
+### has Bool $.quadrants
+
+Supports quadrant 2x2 glyphs (added in Unicode 3.2)
+
+### has Bool $.sextants
+
+Supports sextant 2x3 glyphs (added in Unicode 13.0)
+
+### has Bool $.octants
+
+Supports octant 2x4 glyphs (added in Unicode 16.0)
+
+### has Bool $.sep-quadrants
+
+Supports SEPARATED quadrant 2x2 glyphs (added in Unicode 16.0)
+
+### has Bool $.sep-sextants
+
+Supports SEPARATED sextant 2x3 glyphs (added in Unicode 16.0)
 
 ### method best-symbol-set
 

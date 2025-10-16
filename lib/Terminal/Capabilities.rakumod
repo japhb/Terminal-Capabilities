@@ -120,25 +120,34 @@ work in any terminal font with at least minimal WGL4 compatibility.
 =head2 Known Feature Flags
 
 Several sets of flag (Bool) attributes indicate support for various features.
-There are sets for classic ANSI attributes, color support, and emoji handling:
+There are sets for classic ANSI attributes, color support, emoji handling, and
+drawing symbols (often generated internally by the terminal emulator):
 
 =begin table
-    Attribute    | Supported Feature
-    =============|========================================
-    .bold        | ANSI/VT100 bold attribute
-    .italic      | ANSI/VT100 italic attribute
-    .inverse     | ANSI/VT100 inverse attribute
-    .underline   | ANSI/VT100 underline attribute
-    .color3bit   | Original paletted 3-bit color
-    .colorbright | Bright variants of 3-bit palette
-    .color8bit   | 6x6x6 color cube and 24-value grayscale
-    .color24bit  | 24-bit RGB color
-    .emoji-text  | Text outline emoji (VS15)
-    .emoji-color | Color emoji (VS16)
-    .emoji-skin  | Skin tones for faces and people
-    .emoji-iso   | Emoji flags for ISO country codes
-    .emoji-reg   | Emoji flags for region codes
-    .emoji-zwj   | Emoji combinations via joining (ZWJ)
+    Attribute      | Supported Feature
+    ===============|========================================
+    .bold          | ANSI/VT100 bold attribute
+    .italic        | ANSI/VT100 italic attribute
+    .inverse       | ANSI/VT100 inverse attribute
+    .underline     | ANSI/VT100 underline attribute
+    .color3bit     | Original paletted 3-bit color
+    .colorbright   | Bright variants of 3-bit palette
+    .color8bit     | 6x6x6 color cube and 24-value grayscale
+    .color24bit    | 24-bit RGB color
+    .emoji-text    | Text outline emoji (VS15)
+    .emoji-color   | Color emoji (VS16)
+    .emoji-skin    | Skin tones for faces and people
+    .emoji-iso     | Emoji flags for ISO country codes
+    .emoji-reg     | Emoji flags for region codes
+    .emoji-zwj     | Emoji combinations via joining (ZWJ)
+    .vt100-boxes   | Original VT100 box drawing glyphs
+    .half-blocks   | Top/bottom half-cell 1x2 blocks
+    .quadrants     | Quadrant 2x2 blocks
+    .sextants      | Sextant 2x3 blocks
+    .octants       | Octant 2x4 blocks
+    .sep-quadrants | Separated quadrant 2x2 blocks
+    .sep-sextants  | Separated sextant 2x3 blocks
+    .braille       | Braille/separated octant 2x4 glyphs
 =end table
 
 =end pod
@@ -165,7 +174,29 @@ sub symbol-set(Str:D $set = 'Full' --> SymbolSet:D) is export {
 has SymbolSet:D $.symbol-set = ASCII;
 
 #| Supports VT100 box drawing glyphs (nearly universal, but only *required* by WGL4R)
-has Bool $.vt100-boxes = $!symbol-set >= WGL4R;
+has Bool $.vt100-boxes   = $!symbol-set >= WGL4R;
+
+#| Supports half-block 1x2 glyphs (partially supported in WGL4R, but not fully until WGL4)
+has Bool $.half-blocks   = $!symbol-set >= WGL4;
+
+#| Supports Braille glyphs (~ separated 2x4 octants, added in Unicode 3.0)
+has Bool $.braille       = $!symbol-set >= Uni3;
+
+#| Supports quadrant 2x2 glyphs (added in Unicode 3.2)
+has Bool $.quadrants     = $!symbol-set >= Uni3;
+
+#| Supports sextant 2x3 glyphs (added in Unicode 13.0)
+has Bool $.sextants      = False;
+
+#| Supports octant 2x4 glyphs (added in Unicode 16.0)
+has Bool $.octants       = False;
+
+#| Supports SEPARATED quadrant 2x2 glyphs (added in Unicode 16.0)
+has Bool $.sep-quadrants = False;
+
+#| Supports SEPARATED sextant 2x3 glyphs (added in Unicode 16.0)
+has Bool $.sep-sextants  = False;
+
 
 # Feature flags, with defaults based on majority of Terminal::Tests
 # screenshot submissions (True iff universally supported or nearly so)
