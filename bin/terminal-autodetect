@@ -19,7 +19,7 @@ sub show-env() {
     section('CRT',         < COLORSCHEMES_DIR KB_LAYOUT_DIR >);
     section('Ghostty',     < GHOSTTY_BIN_DIR GHOSTTY_RESOURCES_DIR GHOSTTY_SHELL_INTEGRATION_NO_SUDO >);
     section('kitty',       < KITTY_WINDOW_ID KITTY_PID KITTY_PUBLIC_KEY KITTY_INSTALLATION_DIR >);
-    section('Konsole',     < KONSOLE_DBUS_SERVICE KONSOLE_DBUS_SESSION KONSOLE_DBUS_WINDOW >);
+    section('Konsole',     < KONSOLE_VERSION KONSOLE_DBUS_SERVICE KONSOLE_DBUS_SESSION KONSOLE_DBUS_WINDOW >);
     section('MLTerm',      [ 'MLTERM', ]);
     section('Qt',          < D_DISABLE_RT_SCREEN_SCALE QT_SCALE_FACTOR_ROUNDING_POLICY >);
     section('screen',      < STY WINDOW TERMCAP >);
