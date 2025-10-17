@@ -1,6 +1,11 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Bug fixes]
+  - Improve autodetection, especially when recursing multiplexers
+  - Shorten multiplexer terminal strings and reduce multiple version mess
+  - Add reporting of missed env var GHOSTTY_SHELL_FEATURES
+
 
 0.0.10  2025-10-15T23:43:44-07:00
   [Features]
