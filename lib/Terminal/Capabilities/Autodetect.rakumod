@@ -163,6 +163,20 @@ sub terminal-env-detect() is export {
                 $quadrants  = True;
             }
         }
+        elsif %*ENV<KONSOLE_VERSION> -> $v {
+            # Konsole sets COLORTERM=truecolor, detected above
+            $terminal = 'Konsole';
+            $version  = $v;
+            $italic   = True;
+
+            if $has-utf8 {
+                $symbol-set = symbol-set('Uni7');
+                $braille    = True;
+                $quadrants  = True;
+                $sextants   = True;
+                $emoji-text = True;
+            }
+        }
         elsif %*ENV<ZUTTY_VERSION> -> $v {
             # Zutty sets COLORTERM=truecolor, detected above
             $terminal    = 'Zutty';
@@ -177,21 +191,12 @@ sub terminal-env-detect() is export {
         }
         elsif %*ENV<TERM_PROGRAM> -> $prog {
             $terminal = $prog;
-            $version  = %*ENV<TERM_PROGRAM_VERSION>;
+            $version  = %*ENV<TERM_PROGRAM_VERSION> // '';
 
-            if %*ENV<TERMINOLOGY> {
-                $italic      = True;
-                $colorbright = True;
-                $color8bit   = True;
-
-                if $has-utf8 {
-                    $symbol-set = symbol-set('Uni3');
-                    $emoji-text = True;
-                }
-            }
-            elsif $prog eq 'ghostty' {
+            if $prog eq 'ghostty' || %*ENV<GHOSTTY_BIN_DIR> {
                 # Ghostty sets COLORTERM=truecolor, detected above
-                $italic = True;
+                $terminal = 'ghostty';
+                $italic   = True;
 
                 if $has-utf8 {
                     $symbol-set    = symbol-set('Full');
@@ -230,23 +235,19 @@ sub terminal-env-detect() is export {
                 # XXXX: Need to update utf-8 symbols using recent test
             }
         }
-        elsif %*ENV<ALACRITTY_WINDOW_ID> {
-            # Alacritty sets COLORTERM=truecolor, detected above
-            $terminal = 'Alacritty';
-            $italic   = True;
+        elsif %*ENV<TERMINOLOGY> {
+            $italic      = True;
+            $colorbright = True;
+            $color8bit   = True;
 
             if $has-utf8 {
-                $symbol-set = symbol-set('Uni7');
-                $braille    = True;
-                $quadrants  = True;
-                $sextants   = True;
+                $symbol-set = symbol-set('Uni3');
                 $emoji-text = True;
             }
         }
-        elsif %*ENV<KONSOLE_VERSION> -> $v {
-            # Konsole sets COLORTERM=truecolor, detected above
-            $terminal = 'Konsole';
-            $version  = $v;
+        elsif %*ENV<ALACRITTY_WINDOW_ID> {
+            # Alacritty sets COLORTERM=truecolor, detected above
+            $terminal = 'Alacritty';
             $italic   = True;
 
             if $has-utf8 {
