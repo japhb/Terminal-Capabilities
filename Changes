@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.11  2025-10-16T22:27:38-07:00
   [Bug fixes]
   - Improve autodetection, especially when recursing multiplexers
   - Shorten multiplexer terminal strings and reduce multiple version mess
