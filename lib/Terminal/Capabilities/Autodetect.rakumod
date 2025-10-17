@@ -54,8 +54,8 @@ sub terminal-env-detect() is export {
         my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
 
         my $caps   = $under-caps.clone(:$emoji-text, :$emoji-reg, :$emoji-zwj);
-        $terminal ~= ' on ' ~ $under-terminal;
-        $terminal ~= ' version ' ~ $under-version if $under-version;
+        $terminal ~= '+' ~ $under-terminal;
+        $terminal ~= '/' ~ $under-version if $under-version;
 
         return ($caps, $terminal, $version);
     }
@@ -73,8 +73,9 @@ sub terminal-env-detect() is export {
         my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
 
         my $caps   = $under-caps.clone(:$color24bit, :$emoji-reg, :$emoji-zwj);
-        $terminal ~= ' on ' ~ $under-terminal;
-        $terminal ~= ' version ' ~ $under-version if $under-version;
+        $terminal ~= '/' ~ $version if $version;
+        $terminal ~= '+' ~ $under-terminal;
+        $terminal ~= '/' ~ $under-version if $under-version;
 
         return ($caps, $terminal, $version);
     }
@@ -93,8 +94,8 @@ sub terminal-env-detect() is export {
             my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
 
             my $caps   = $under-caps.clone(:$italic, :$color24bit);
-            $terminal ~= ' on ' ~ $under-terminal;
-            $terminal ~= ' version ' ~ $under-version if $under-version;
+            $terminal ~= '+' ~ $under-terminal;
+            $terminal ~= '/' ~ $under-version if $under-version;
 
             return ($caps, $terminal, $version);
         }
