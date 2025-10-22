@@ -362,15 +362,21 @@ sub terminal-env-detect() is export {
             $emoji-text = True;
         }
     }
-    elsif ?$term.starts-with('rxvt') {
+    elsif ?$term.starts-with('rxvt'|'urxvt') {
+        # rxvt maps colors back to its own 88- or 256-color palette, thus not
+        # really supporting standard colors, even though rxvt parses and seems
+        # to apply them.  We'll assume for now that rxvt will only add the
+        # '-256color' suffix to TERM if it is *actually* using 256 colors.
+
         $terminal    = 'rxvt';
         $italic      = True;
         $color3bit   = True;
         $colorbright = True;
-        $color8bit   = True;
 
         if $has-utf8 {
             $symbol-set = symbol-set('Uni3');
+            $quadrants  = True;
+            $braille    = True;
         }
     }
     elsif ?$term.starts-with('vt220'|'vt420')
