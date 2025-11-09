@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.13  2025-11-09T00:51:34-08:00
   [Features]
   - Add support for autodetecting Windows Terminal, even if outside WSL
 
