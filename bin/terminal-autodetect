@@ -27,6 +27,7 @@ sub show-env() {
     section('Terminology', < TERMINOLOGY XTERM_256_COLORS >);
     section('tmux',        < TMUX TMUX_PANE >);
     section('VTE',         < VTE_VERSION TILIX_ID GNOME_TERMINAL_SERVICE GNOME_TERMINAL_SCREEN >);
+    section('Windows Terminal', < WT_SESSION WT_PROFILE_ID >);
     section('Xterm',       < XTERM_VERSION XTERM_SHELL XTERM_LOCALE >);
     section('Zellij',      < ZELLIJ ZELLIJ_PANE_ID ZELLIJ_SESSION_NAME >);
     section('Zutty',       [ 'ZUTTY_VERSION', ]);

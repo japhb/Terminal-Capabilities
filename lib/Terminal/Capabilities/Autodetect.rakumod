@@ -215,6 +215,27 @@ sub terminal-env-detect() is export {
                 $emoji-text = True;
             }
         }
+        elsif %*ENV<WT_SESSION> {
+            # XXXX: Duplicated from non-xtermish case for multiplexer recursion
+
+            $terminal    = 'Windows Terminal';
+            $italic      = True;
+            $color3bit   = True;
+            $color8bit   = True;
+            $color24bit  = True;
+            $colorbright = True;
+            $vt100-boxes = True;
+            $half-blocks = True;
+
+            if $has-utf8 {
+                $symbol-set  = symbol-set('Uni7');
+                $braille     = True;
+                $quadrants   = True;
+                $emoji-color = True;
+                $emoji-skin  = True;
+                $emoji-zwj   = True;
+            }
+        }
         elsif %*ENV<COLORSCHEMES_DIR> {
             $terminal = 'CRT';  # AKA Cool Retro Term, QMLTermWidget
             $italic   = True;
@@ -323,6 +344,27 @@ sub terminal-env-detect() is export {
             $quadrants  = True;
             $sextants   = True;
             $emoji-text = True;
+        }
+    }
+    elsif %*ENV<WT_SESSION> {
+        # XXXX: Duplicated above into xtermish case for multiplexer recursion
+
+        $terminal    = 'Windows Terminal';
+        $italic      = True;
+        $color3bit   = True;
+        $color8bit   = True;
+        $color24bit  = True;
+        $colorbright = True;
+        $vt100-boxes = True;
+        $half-blocks = True;
+
+        if $has-utf8 {
+            $symbol-set  = symbol-set('Uni7');
+            $braille     = True;
+            $quadrants   = True;
+            $emoji-color = True;
+            $emoji-skin  = True;
+            $emoji-zwj   = True;
         }
     }
     elsif $term eq 'mlterm' {
