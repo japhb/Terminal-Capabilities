@@ -1,6 +1,9 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Features]
+  - Autodetect emoji fixes expected in VTE 0.84
+
 
 0.0.13  2025-11-09T00:51:34-08:00
   [Features]

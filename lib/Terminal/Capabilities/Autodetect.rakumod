@@ -149,6 +149,14 @@ sub terminal-env-detect() is export {
                 $emoji-text  = True;
                 $emoji-color = True;
                 $emoji-reg   = True;
+
+                # Planned for VTE 0.84 AKA VTE/8400
+                # See https://gitlab.gnome.org/GNOME/vte/-/issues/2909
+                if $version >= 8400 {
+                    $emoji-skin = True;
+                    $emoji-iso  = True;
+                    $emoji-zwj  = True;
+                }
             }
 
             # Mixed among VTEs:
