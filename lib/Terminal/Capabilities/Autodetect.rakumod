@@ -24,7 +24,11 @@ sub terminal-env-detect() is export {
     my Bool:D $sep-quadrants = False;
     my Bool:D $sep-sextants  = False;
 
+    my Bool:D $faint       = False;
     my Bool:D $italic      = False;
+    my Bool:D $strike      = False;
+    my Bool:D $overline    = False;
+    my Bool:D $dunderline  = False;
 
     my Bool:D $color24bit  = ?$term.contains('truecolor'|'24bit')
                            || so ($colorterm // '') eq 'truecolor'|'24bit';
@@ -68,6 +72,7 @@ sub terminal-env-detect() is export {
         # XXXX: color24bit rarely *not* broken?
         $color24bit = False;
         $emoji-iso  = False;
+        $overline   = False;
 
         # Try to recurse to detect underlying terminal's capabilities
         # Note: tmux tramples several variables; flush or replace them all
@@ -98,6 +103,9 @@ sub terminal-env-detect() is export {
         #       how to detect this?
         $italic     = False;
         $color24bit = False;
+        $dunderline = False;
+        $overline   = False;
+        $strike     = False;
 
         # Try to recurse to detect underlying terminal's capabilities
         temp %*ENV<TERM> = $term ~~ /^ 'screen.' (.+) $/ ?? ~$0 !!
@@ -120,7 +128,11 @@ sub terminal-env-detect() is export {
 
         if $term eq 'xterm-kitty' || %*ENV<KITTY_WINDOW_ID> {
             $terminal   = 'kitty';
+
+            $faint      = True;
             $italic     = True;
+            $strike     = True;
+            $dunderline = True;
             $color24bit = True;
             $color8bit  = True;
 
@@ -137,9 +149,14 @@ sub terminal-env-detect() is export {
             }
         }
         elsif %*ENV<VTE_VERSION> -> $v {
-            $terminal = 'VTE';
-            $version  = $v;
-            $italic   = True;
+            $terminal   = 'VTE';
+            $version    = $v;
+
+            $faint      = True;
+            $italic     = True;
+            $strike     = True;
+            $overline   = True;
+            $dunderline = True;
 
             if $has-utf8 {
                 $symbol-set  = symbol-set('Uni7');
@@ -171,7 +188,9 @@ sub terminal-env-detect() is export {
             $terminal     = 'xterm';
             $version      = $v.comb(/\d+/)[0] || 0;
 
+            $faint        = True;
             $italic       = True;
+            $strike       = True;
             $colorbright  = True;
             $color8bit  ||= $version >= 331;  # When it became default
             $color24bit ||= $version >= 331;
@@ -184,9 +203,14 @@ sub terminal-env-detect() is export {
         }
         elsif %*ENV<KONSOLE_VERSION> -> $v {
             # Konsole sets COLORTERM=truecolor, detected above
-            $terminal = 'Konsole';
-            $version  = $v;
-            $italic   = True;
+            $terminal   = 'Konsole';
+            $version    = $v;
+
+            $faint      = True;
+            $italic     = True;
+            $strike     = True;
+            $overline   = True;
+            $dunderline = True;
 
             if $has-utf8 {
                 $symbol-set = symbol-set('Uni7');
@@ -213,7 +237,10 @@ sub terminal-env-detect() is export {
 
             # Alacritty sets COLORTERM=truecolor, detected above
             $terminal = 'Alacritty';
+
+            $faint    = True;
             $italic   = True;
+            $strike   = True;
 
             if $has-utf8 {
                 $symbol-set = symbol-set('Uni7');
@@ -273,7 +300,9 @@ sub terminal-env-detect() is export {
             $version  = %*ENV<TERM_PROGRAM_VERSION> // '';
 
             if %*ENV<TERMINOLOGY> {
+                $faint       = True;
                 $italic      = True;
+                $strike      = True;
                 $colorbright = True;
                 $color8bit   = True;
 
@@ -285,8 +314,13 @@ sub terminal-env-detect() is export {
             }
             elsif $prog eq 'ghostty' || %*ENV<GHOSTTY_BIN_DIR> {
                 # Ghostty sets COLORTERM=truecolor, detected above
-                $terminal = 'ghostty';
-                $italic   = True;
+                $terminal   = 'ghostty';
+
+                $faint      = True;
+                $italic     = True;
+                $strike     = True;
+                $overline   = True;
+                $dunderline = True;
 
                 if $has-utf8 {
                     $symbol-set    = symbol-set('Full');
@@ -344,7 +378,10 @@ sub terminal-env-detect() is export {
 
         # Alacritty sets COLORTERM=truecolor, detected above
         $terminal = 'Alacritty';
+
+        $faint    = True;
         $italic   = True;
+        $strike   = True;
 
         if $has-utf8 {
             $symbol-set = symbol-set('Uni7');
@@ -377,9 +414,13 @@ sub terminal-env-detect() is export {
     }
     elsif $term eq 'mlterm' {
         # mlterm sets COLORTERM=truecolor, detected above
-        $terminal = $term;
-        $version  = %*ENV<MLTERM>;
-        $italic   = True;
+        $terminal   = $term;
+        $version    = %*ENV<MLTERM>;
+
+        $italic     = True;
+        $strike     = True;
+        $overline   = True;
+        $dunderline = True;
 
         if $has-utf8 {
             $symbol-set = symbol-set('Uni3');
@@ -400,7 +441,11 @@ sub terminal-env-detect() is export {
     }
     elsif $term eq 'st'|'st-256color' {
         $terminal    = 'st';
+
+        $faint       = True;
         $italic      = True;
+        $strike      = True;
+
         $color3bit   = True;
         $colorbright = True;
         $color8bit   = True;
@@ -436,7 +481,8 @@ sub terminal-env-detect() is export {
     }
 
     my $caps = Terminal::Capabilities.new:
-        :$symbol-set,    :$italic,
+        :$symbol-set,    :$faint,        :$italic,
+        :$strike,        :$overline,     :$dunderline,
         :$color3bit,     :$colorbright,  :$color8bit,  :$color24bit,
         :$emoji-text,    :$emoji-color,  :$emoji-skin,
         :$emoji-iso,     :$emoji-reg,    :$emoji-zwj,
