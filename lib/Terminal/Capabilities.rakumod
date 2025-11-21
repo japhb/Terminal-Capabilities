@@ -126,10 +126,14 @@ drawing symbols (often generated internally by the terminal emulator):
 =begin table
     Attribute      | Supported Feature
     ===============|========================================
-    .bold          | ANSI/VT100 bold attribute
-    .italic        | ANSI/VT100 italic attribute
-    .inverse       | ANSI/VT100 inverse attribute
-    .underline     | ANSI/VT100 underline attribute
+    .bold          | ANSI/VT/ECMA-48 bold attribute
+    .faint         | ANSI/VT/ECMA-48 faint attribute
+    .italic        | ANSI/VT/ECMA-48 italic attribute
+    .inverse       | ANSI/VT/ECMA-48 inverse attribute
+    .strike        | ANSI/VT/ECMA-48 strike attribute
+    .overline      | ANSI/VT/ECMA-48 overline attribute
+    .underline     | ANSI/VT/ECMA-48 underline attribute
+    .dunderline    | ANSI/VT/ECMA-48 dunderline attribute
     .color3bit     | Original paletted 3-bit color
     .colorbright   | Bright variants of 3-bit palette
     .color8bit     | 6x6x6 color cube and 24-value grayscale
@@ -201,9 +205,14 @@ has Bool $.sep-sextants  = False;
 # Feature flags, with defaults based on majority of Terminal::Tests
 # screenshot submissions (True iff universally supported or nearly so)
 has Bool $.bold        = True;   #= Supports bold attribute
+has Bool $.faint       = False;  #= Supports faint attribute
 has Bool $.italic      = False;  #= Supports italic attribute
 has Bool $.inverse     = True;   #= Supports inverse attribute
+
+has Bool $.strike      = False;  #= Supports strike attribute (strikethrough)
+has Bool $.overline    = False;  #= Supports overline attribute
 has Bool $.underline   = True;   #= Supports underline attribute
+has Bool $.dunderline  = False;  #= Supports dunderline attribute (double underline)
 
 has Bool $.color3bit   = True;   #= Supports original paletted 3-bit color
 has Bool $.colorbright = False;  #= Supports bright foregrounds for 3-bit palette
