@@ -1,8 +1,12 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.14  2025-11-20T22:11:08-08:00
   [Features]
   - Autodetect emoji fixes expected in VTE 0.84
+  - Add core support for faint, strike, overline, and dunderline attribute caps
+  - Add autodetection support for new attribute caps
 
 
 0.0.13  2025-11-09T00:51:34-08:00
