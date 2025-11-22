@@ -1,6 +1,10 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Tests]
+  - Update t/03-feature-defaults.rakutest, which hadn't been updated for newly
+    supported capabilities in a while
+
 
 0.0.14  2025-11-20T22:11:08-08:00
   [Features]
