@@ -1,6 +1,18 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Bug Fixes]
+  - Add missing caps reporting in terminal-autodetect
+  - Add missing GNU screen cap breakage flags
+
+  [Docs]
+  - Add doc comparing Unicode releases and OS support lifetimes
+
+  [Features]
+  - Add support for Uni13 and Uni16 symbol sets
+  - Autodetect Uni13 support on supporting Terminals
+  - Autodetect more block drawing features based on Uni13 and Uni16 support
+
   [Tests]
   - Update t/03-feature-defaults.rakutest, which hadn't been updated for newly
     supported capabilities in a while
@@ -19,7 +31,7 @@ Revision history for Terminal-Capabilities
 
 
 0.0.12  2025-10-21T21:01:14-07:00
-  [Bug fixes]
+  [Bug Fixes]
   - Corrections for rxvt autodetection
 
 
