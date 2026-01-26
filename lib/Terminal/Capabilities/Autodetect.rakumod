@@ -19,10 +19,10 @@ sub terminal-env-detect() is export {
     my Bool:D $half-blocks   = $symbol-set >= Terminal::Capabilities::SymbolSet::WGL4;
     my Bool:D $braille       = $symbol-set >= Terminal::Capabilities::SymbolSet::Uni3;
     my Bool:D $quadrants     = $symbol-set >= Terminal::Capabilities::SymbolSet::Uni3;
-    my Bool:D $sextants      = False;
-    my Bool:D $octants       = False;
-    my Bool:D $sep-quadrants = False;
-    my Bool:D $sep-sextants  = False;
+    my Bool:D $sextants      = $symbol-set >= Terminal::Capabilities::SymbolSet::Uni13;
+    my Bool:D $octants       = $symbol-set >= Terminal::Capabilities::SymbolSet::Uni16;
+    my Bool:D $sep-quadrants = $symbol-set >= Terminal::Capabilities::SymbolSet::Uni16;
+    my Bool:D $sep-sextants  = $symbol-set >= Terminal::Capabilities::SymbolSet::Uni16;
 
     my Bool:D $faint       = False;
     my Bool:D $italic      = False;

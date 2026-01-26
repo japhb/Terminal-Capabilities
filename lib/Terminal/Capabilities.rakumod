@@ -193,16 +193,16 @@ has Bool $.braille       = $!symbol-set >= Uni3;
 has Bool $.quadrants     = $!symbol-set >= Uni3;
 
 #| Supports sextant 2x3 glyphs (added in Unicode 13.0)
-has Bool $.sextants      = False;
+has Bool $.sextants      = $!symbol-set >= Uni13;
 
 #| Supports octant 2x4 glyphs (added in Unicode 16.0)
-has Bool $.octants       = False;
+has Bool $.octants       = $!symbol-set >= Uni16;
 
 #| Supports SEPARATED quadrant 2x2 glyphs (added in Unicode 16.0)
-has Bool $.sep-quadrants = False;
+has Bool $.sep-quadrants = $!symbol-set >= Uni16;
 
 #| Supports SEPARATED sextant 2x3 glyphs (added in Unicode 16.0)
-has Bool $.sep-sextants  = False;
+has Bool $.sep-sextants  = $!symbol-set >= Uni16;
 
 
 # Feature flags, with defaults based on majority of Terminal::Tests

@@ -51,10 +51,10 @@ for Terminal::Capabilities::SymbolSet.^enum_value_list -> $symbol-set {
 
     # Drawing glyphs with poor font support and which
     # few terminals implement manually default False
-    is $caps.sextants,      False;
-    is $caps.octants,       False;
-    is $caps.sep-quadrants, False;
-    is $caps.sep-sextants,  False;
+    is $caps.sextants,      $symbol-set >= Terminal::Capabilities::SymbolSet::Uni13;
+    is $caps.octants,       $symbol-set >= Terminal::Capabilities::SymbolSet::Uni16;
+    is $caps.sep-quadrants, $symbol-set >= Terminal::Capabilities::SymbolSet::Uni16;
+    is $caps.sep-sextants,  $symbol-set >= Terminal::Capabilities::SymbolSet::Uni16;
 
     # Other capabilities have fixed defaults
     is $caps.bold,          True;
