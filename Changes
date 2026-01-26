@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.15  2026-01-25T22:07:27-08:00
   [Bug Fixes]
   - Add missing caps reporting in terminal-autodetect
   - Add missing GNU screen cap breakage flags
