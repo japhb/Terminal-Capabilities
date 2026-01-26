@@ -107,6 +107,8 @@ In superset order, from smallest to largest:
     Uni1       | Unicode 1.1
     Uni3       | Unicode 3.2
     Uni7       | Unicode 7.0 and Emoji 0.7
+    Uni13      | Unicode+Emoji 13.0
+    Uni16      | Unicode+Emoji 16.0
     Full       | Full modern Unicode support (most features)
 =end table
 
@@ -164,7 +166,8 @@ unit class Terminal::Capabilities;
 # Known symbol sets in superset order, smallest to largest
 # Note: Unicode 2.x intentionally skipped as only 4 general symbol codepoints
 #       were added outside the Hangul, Tibetan, and Hebrew scripts (the 2.x focus)
-enum SymbolSet < ASCII Latin1 CP1252 W1G WGL4R WGL4 MES2 Uni1 Uni3 Uni7 Full >;
+enum SymbolSet < ASCII Latin1 CP1252 W1G WGL4R WGL4 MES2
+                 Uni1 Uni3 Uni7 Uni13 Uni16 Full >;
 
 
 #| Determine the correct SymbolSet enumerant for a possibly mis-cased string
