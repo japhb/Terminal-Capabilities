@@ -138,7 +138,7 @@ sub terminal-env-detect() is export {
             $color8bit  = True;
 
             if $has-utf8 {
-                $symbol-set  = symbol-set('Full');
+                $symbol-set  = symbol-set('Uni13');
                 $braille     = True;
                 $quadrants   = True;
                 $sextants    = True;
@@ -171,6 +171,7 @@ sub terminal-env-detect() is export {
                 # Planned for VTE 0.84 AKA VTE/8400
                 # See https://gitlab.gnome.org/GNOME/vte/-/issues/2909
                 if $version >= 8400 {
+                    $symbol-set = symbol-set('Uni13');
                     $emoji-skin = True;
                     $emoji-iso  = True;
                     $emoji-zwj  = True;
@@ -324,13 +325,16 @@ sub terminal-env-detect() is export {
                 $dunderline = True;
 
                 if $has-utf8 {
-                    $symbol-set    = symbol-set('Full');
+                    my $is-ge12    = Version($version) >= Version(1.2);
+                    $symbol-set    = $is-ge12 ?? symbol-set('Full')
+                                              !! symbol-set('Uni13');
+
                     $braille       = True;
                     $quadrants     = True;
                     $sextants      = True;
                     $octants       = True;
                     $sep-quadrants = True;
-                    $sep-sextants  = True if Version($version) >= Version(1.2);
+                    $sep-sextants  = True if $is-ge12;
 
                     $emoji-text    = True;
                     $emoji-color   = True;
