@@ -112,7 +112,8 @@ sub terminal-env-detect() is export {
                            $color8bit ?? 'xterm-256color' !! 'xterm';
         my ($under-caps, $under-terminal, $under-version) = terminal-env-detect;
 
-        my $caps   = $under-caps.clone(:$italic, :$color24bit);
+        my $caps   = $under-caps.clone(:$italic, :$color24bit,
+                                       :$dunderline, :$overline, :$strike);
         $terminal ~= '+' ~ $under-terminal;
         $terminal ~= '/' ~ $under-version if  $under-version
                                           && !$under-terminal.contains('/');
