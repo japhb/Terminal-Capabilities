@@ -47,10 +47,14 @@ sub MAIN(Bool :$show-env,  #= Show known terminal-related environment values als
     put "Version:  {$version  // 'unknown'}";
     put 'Caps:';
 
-    for < symbol-set vt100-boxes bold italic inverse underline
+    for < symbol-set vt100-boxes half-blocks
+          braille quadrants sextants octants
+          sep-quadrants sep-sextants
+          bold faint italic inverse
+          strike overline underline dunderline
           color3bit  colorbright color8bit color24bit
           emoji-text emoji-color emoji-skin
           emoji-iso  emoji-reg   emoji-zwj > {
-        printf "  %-11s  %s\n", $_, $caps."$_"();
+        printf "  %-13s  %s\n", $_, $caps."$_"();
     }
 }
