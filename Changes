@@ -1,6 +1,17 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Features]
+  - Improve autodetection of iTerm
+  - Add autodetection of Tabby and WezTerm
+  - Add macOS env vars to `terminal-autodetect --show-env`
+  - Refactor `terminal-autodetect --show-env` to improve readability
+  - Add --verbose option to terminal-autodect and reduce default verbosity
+  - Add T::C::Summarize to produce single-line terse summary of autodetection
+
+  [Packaging]
+  - Add dependency on Terminal::ANSIColor (used in T::C::Summarize only)
+
 
 0.0.16  2026-03-07T19:48:39-08:00
   [Features]
