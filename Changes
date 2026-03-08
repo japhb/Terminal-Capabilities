@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.16  2026-03-07T19:48:39-08:00
   [Features]
   - Update Apple_Terminal autodetection for recent tests
 
