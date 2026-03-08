@@ -1,6 +1,12 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Features]
+  - Update Apple_Terminal autodetection for recent tests
+
+  [Tests]
+  - Add missing symbol-sets in 01-symbol-set test
+
 
 0.0.15  2026-01-25T22:07:27-08:00
   [Bug Fixes]
