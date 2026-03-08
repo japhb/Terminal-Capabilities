@@ -360,8 +360,20 @@ sub terminal-env-detect() is export {
                 }
             }
             elsif $prog eq 'Apple_Terminal' {
-                $color8bit = True;
-                # XXXX: Need to update utf-8 symbols using recent test
+                # As of version 466
+
+                $faint      = True;
+                $italic     = True;
+                $color8bit  = True;
+                $color24bit = True;
+
+                if $has-utf8 {
+                    $symbol-set  = symbol-set('Uni3');
+                    $braille     = True;
+                    $quadrants   = True;
+                    $emoji-color = True;
+                    $emoji-skin  = True;
+                }
             }
         }
         else {
