@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.17  2026-03-08T14:10:18-07:00
   [Features]
   - Improve autodetection of iTerm
   - Add autodetection of Tabby and WezTerm
