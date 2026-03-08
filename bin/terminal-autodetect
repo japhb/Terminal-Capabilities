@@ -25,7 +25,7 @@ sub section($section, @vars) {
 
 
 # Show current values of all known terminal-related environment variables
-sub show-env() {
+sub show-env(Bool $verbose) {
     my @term-vars =
         # Used by many terminals
         'General'     => < LANG TERM COLORTERM COLORFGBG TERM_PROGRAM TERM_PROGRAM_VERSION >,
@@ -55,16 +55,20 @@ sub show-env() {
 
     my %split = @term-vars.classify({ has-a-var(.value) });
     section(.key, .value) for @(%split{True});
-    section(.key, .value) for @(%split{False});
-    put '' if %split{False};
+
+    if $verbose {
+        section(.key, .value) for @(%split{False});
+        put '' if %split{False};
+    }
 }
 
 
 #| Show autodetected terminal capabilities
 sub MAIN(Bool :$show-env,  #= Show known terminal-related environment values also
+         Bool :$verbose,   #= Show detection results in verbose form
         ) {
     if $show-env {
-        show-env;
+        show-env($verbose);
         put BOLD_YELLOW ~ 'Detected' ~ RESET;
     }
 
