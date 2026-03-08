@@ -344,13 +344,66 @@ sub terminal-env-detect() is export {
                     $emoji-zwj     = True;
                 }
             }
-            elsif $prog eq 'iTerm.app' {
+            elsif $prog eq 'WezTerm' || %*ENV<WEZTERM_EXECUTABLE> {
+                # As of version 20240203-110809-5046fc22
+
+                $faint        = True;
                 $italic       = True;
+                $strike       = True;
+                $overline     = True;
+                $dunderline   = True;
+
+                $colorbright  = True;
+                $color8bit    = True;
+                $color24bit   = True;
+
+                if $has-utf8 {
+                    $braille     = True;
+                    $quadrants   = True;
+                    $sextants    = True;
+
+                    $emoji-color = True;
+                    $emoji-skin  = True;
+                    $emoji-iso   = True;
+                    $emoji-reg   = True;
+                    $emoji-zwj   = True;
+                }
+            }
+            elsif $prog eq 'Tabby' || %*ENV<TABBY_CONFIG_DIRECTORY> {
+                # Version not detected
+
+                $faint        = True;
+                $italic       = True;
+                $strike       = True;
+                $overline     = True;
+                $dunderline   = True;
+
+                $colorbright  = True;
+                $color8bit    = True;
+                $color24bit   = True;
+
+                if $has-utf8 {
+                    $braille     = True;
+                    $quadrants   = True;
+                    $emoji-color = True;
+                }
+            }
+            elsif $prog eq 'iTerm.app' || %*ENV<ITERM_SESSION_ID> {
+                # As of version 3.6.8
+
+                $faint        = True;
+                $italic       = True;
+                $strike       = True;
+                $dunderline   = True;
+
+                $colorbright  = True;
                 $color8bit    = True;
                 $color24bit ||= ($version // '').split('.')[0] >= 3;
 
                 if $has-utf8 {
-                    # XXXX: Need to update symbols using recent test
+                    $braille     = True;
+                    $quadrants   = True;
+                    $sextants    = True;
 
                     $emoji-color = True;
                     $emoji-skin  = True;
