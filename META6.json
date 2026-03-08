@@ -6,6 +6,7 @@
   "build-depends": [
   ],
   "depends": [
+    "Terminal::ANSIColor:ver<0.14+>:auth<zef:raku-community-modules>"
   ],
   "description": "Container for terminal capabilities, with useful defaults",
   "license": "Artistic-2.0",
@@ -13,7 +14,8 @@
   "perl": "6.d",
   "provides": {
     "Terminal::Capabilities": "lib/Terminal/Capabilities.rakumod",
-    "Terminal::Capabilities::Autodetect": "lib/Terminal/Capabilities/Autodetect.rakumod"
+    "Terminal::Capabilities::Autodetect": "lib/Terminal/Capabilities/Autodetect.rakumod",
+    "Terminal::Capabilities::Summarize": "lib/Terminal/Capabilities/Summarize.rakumod"
   },
   "resources": [
   ],
