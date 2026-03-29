@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.18  2026-03-28T22:14:17-07:00
   [Docs]
   - Add T::C::Summarize to README
 
