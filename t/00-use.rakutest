@@ -3,6 +3,7 @@ use Test;
 
 use Terminal::Capabilities;
 use Terminal::Capabilities::Autodetect;
+use Terminal::Capabilities::Summarize;
 
 
 pass "all modules loaded successfully";

@@ -11,11 +11,15 @@ SYNOPSIS
 ```raku
 use Terminal::Capabilities;
 use Terminal::Capabilities::Autodetect;
+use Terminal::Capabilities::Summarize;
 
 # Autodetect terminal and its capabilities via examination of terminal-related
 # environment variables.  This does not touch the process table or run any
 # subprocesses, so it should be quick and safe.
 my ($autocaps, $terminal, $version) = terminal-env-detect;
+
+# Autodetect and include a one-line compact human-readable summary of detected features
+my ($caps, $terminal, $version, $summary) = summarize-autodetection;
 
 # Create a terminal capabilities object with DEFAULT settings based on the most
 # commonly well-supported capabilities, as determined by submissions to the
@@ -60,6 +64,13 @@ The `Terminal::Capabilities::Autodetect` child module provides routines for auto
 ```raku
 use Terminal::Capabilities::Autodetect;
 my ($caps, $type, $version) = terminal-env-detect;
+```
+
+If you'd also like to have a summary line that you can show the user or add to a log, you can instead use an extended version of the autodetection routine:
+
+```raku
+use Terminal::Capabilities::Summarize;
+my ($caps, $type, $version, $summary) = summarize-autodetection;
 ```
 
 Conversely, the core `Terminal::Capabilities` module does **not** do any autodetection, merely serving as a standard for collecting capabilities detected or configured through other means. That said, there are reasonable defaults for each of the capability flags based on the collected submissions to the `Terminal::Tests` project. The default values represent the capabilities that are universally supported (or nearly so -- there are a few truly deeply broken terminals for which nearly *nothing* works properly which are considered out of scope for the defaults).
