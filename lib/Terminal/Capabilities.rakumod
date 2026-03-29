@@ -170,6 +170,16 @@ drawing symbols (often generated internally by the terminal emulator):
     .braille       | Braille/separated octant 2x4 glyphs
 =end table
 
+=head2 Quirks
+
+Additional flag (Bool) attributes indicate rendering quirks that may require
+workarounds for some terminals.
+
+=defn .narrow-emoji-needs-space
+Narrow default-text characters displayed as emoji using VS16 must be followed
+by a single space to prevent corrupted rendering, such as cut off, overlapping,
+or missing glyphs.
+
 =end pod
 
 
@@ -242,6 +252,10 @@ has Bool $.emoji-skin  = False;  #= Supports skin tones for faces and people
 has Bool $.emoji-iso   = False;  #= Supports emoji flags for ISO country codes
 has Bool $.emoji-reg   = False;  #= Supports emoji flags for region codes
 has Bool $.emoji-zwj   = False;  #= Supports combined emoji via joining (ZWJ)
+
+
+# Quirk (workaround required) flags
+has Bool $.narrow-emoji-needs-space = False;  #= Needs char+VS16+space for default-narrow emoji
 
 
 #| Find best symbol set supported by this terminal from a list of choices

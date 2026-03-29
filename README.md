@@ -107,6 +107,15 @@ Several sets of flag (Bool) attributes indicate support for various features. Th
 </tbody>
 </table>
 
+Quirks
+------
+
+Additional flag (Bool) attributes indicate rendering quirks that may require workarounds for some terminals.
+
+**.narrow-emoji-needs-space**
+
+Narrow default-text characters displayed as emoji using VS16 must be followed by a single space to prevent corrupted rendering, such as cut off, overlapping, or missing glyphs.
+
 class Terminal::Capabilities
 ----------------------------
 

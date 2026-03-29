@@ -38,6 +38,8 @@ is $caps.emoji-iso,     False;
 is $caps.emoji-reg,     False;
 is $caps.emoji-zwj,     False;
 
+is $caps.narrow-emoji-needs-space, False;
+
 
 # Defaults for specific character sets
 for Terminal::Capabilities::SymbolSet.^enum_value_list -> $symbol-set {
@@ -78,6 +80,9 @@ for Terminal::Capabilities::SymbolSet.^enum_value_list -> $symbol-set {
     is $caps.emoji-iso,     False;
     is $caps.emoji-reg,     False;
     is $caps.emoji-zwj,     False;
+
+    # Quirks also have fixed defaults
+    is $caps.narrow-emoji-needs-space, False;
 }
 
 

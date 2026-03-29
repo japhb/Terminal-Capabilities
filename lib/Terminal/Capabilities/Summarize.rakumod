@@ -47,13 +47,17 @@ multi sub summarize-autodetection($caps, $terminal, $version) is export {
                    ($dragon        if $caps.emoji-reg),
                    ("👨\x[200D]🌾" if $caps.emoji-zwj)).join;
 
+    my $quirks  = (('S' if $caps.narrow-emoji-needs-space),
+                   ).join;
+
     my $summary = $version && !$terminal.contains('/')
                   ?? "$terminal/$version" !! $terminal;
     $summary ~= ' S:' ~ $caps.symbol-set;
-    $summary ~= " A:$attrs" if $attrs;
-    $summary ~= " C:$color" if $color;
-    $summary ~= " D:$draw"  if $draw;
-    $summary ~= " E:$emoji" if $emoji;
+    $summary ~= " A:$attrs"  if $attrs;
+    $summary ~= " C:$color"  if $color;
+    $summary ~= " D:$draw"   if $draw;
+    $summary ~= " E:$emoji"  if $emoji;
+    $summary ~= " Q:$quirks" if $quirks;
 
     ($caps, $terminal, $version, $summary)
 }

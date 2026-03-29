@@ -43,6 +43,8 @@ sub terminal-env-detect() is export {
     my Bool:D $emoji-reg   = False;
     my Bool:D $emoji-zwj   = False;
 
+    my Bool:D $narrow-emoji-needs-space = False;
+
     # Detect terminal multiplexers and recurse for underlying terminal
     if %*ENV<ZELLIJ>.defined {
         $terminal    = 'zellij';
@@ -167,6 +169,8 @@ sub terminal-env-detect() is export {
                 $emoji-text  = True;
                 $emoji-color = True;
                 $emoji-reg   = True;
+
+                $narrow-emoji-needs-space = True;
 
                 # Planned for VTE 0.84 AKA VTE/8400
                 # See https://gitlab.gnome.org/GNOME/vte/-/issues/2909
@@ -558,7 +562,8 @@ sub terminal-env-detect() is export {
         :$emoji-iso,     :$emoji-reg,    :$emoji-zwj,
         :$vt100-boxes,   :$half-blocks,  :$braille,
         :$quadrants,     :$sextants,     :$octants,
-        :$sep-quadrants, :$sep-sextants;
+        :$sep-quadrants, :$sep-sextants,
+        :$narrow-emoji-needs-space;
 
     ($caps, $terminal, $version)
 }
