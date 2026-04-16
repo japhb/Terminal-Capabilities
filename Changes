@@ -1,6 +1,8 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+
+0.0.19  2026-04-15T18:21:59-07:00
   [Docs]
   - Updated 'As of version' comments for several terminal autodetection blocks
 
