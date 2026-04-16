@@ -258,6 +258,8 @@ sub terminal-env-detect() is export {
                 $quadrants  = True;
                 $sextants   = True;
                 $emoji-text = True;
+
+                $narrow-emoji-needs-space = True;
             }
         }
         elsif %*ENV<WT_SESSION> {
@@ -322,6 +324,8 @@ sub terminal-env-detect() is export {
                     $symbol-set = symbol-set('Uni3');
                     $braille    = True;
                     $emoji-text = True;
+
+                    $narrow-emoji-needs-space = True;
                 }
             }
             elsif $prog eq 'ghostty' || %*ENV<GHOSTTY_BIN_DIR> {
@@ -396,6 +400,8 @@ sub terminal-env-detect() is export {
                     $braille     = True;
                     $quadrants   = True;
                     $emoji-color = True;
+
+                    $narrow-emoji-needs-space = True;
                 }
             }
             elsif $prog eq 'iTerm.app' || %*ENV<ITERM_SESSION_ID> {
@@ -436,6 +442,8 @@ sub terminal-env-detect() is export {
                     $quadrants   = True;
                     $emoji-color = True;
                     $emoji-skin  = True;
+
+                    $narrow-emoji-needs-space = True;
                 }
             }
         }
@@ -471,6 +479,8 @@ sub terminal-env-detect() is export {
             $quadrants  = True;
             $sextants   = True;
             $emoji-text = True;
+
+            $narrow-emoji-needs-space = True;
         }
     }
     elsif %*ENV<WT_SESSION> {
@@ -539,6 +549,8 @@ sub terminal-env-detect() is export {
             $symbol-set = symbol-set('Uni7');
             $braille    = True;
             $emoji-text = True;
+
+            $narrow-emoji-needs-space = True;
         }
     }
     elsif ?$term.starts-with('rxvt'|'urxvt') {
