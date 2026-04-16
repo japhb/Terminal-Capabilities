@@ -152,6 +152,8 @@ sub terminal-env-detect() is export {
             }
         }
         elsif %*ENV<VTE_VERSION> -> $v {
+            # As of version 7600
+
             $terminal   = 'VTE';
             $version    = $v;
 
@@ -241,6 +243,8 @@ sub terminal-env-detect() is export {
         elsif %*ENV<ALACRITTY_WINDOW_ID> {
             # XXXX: Duplicated from non-xtermish case for multiplexer recursion
 
+            # Version not detected
+
             # Alacritty sets COLORTERM=truecolor, detected above
             $terminal = 'Alacritty';
 
@@ -306,6 +310,8 @@ sub terminal-env-detect() is export {
             $version  = %*ENV<TERM_PROGRAM_VERSION> // '';
 
             if %*ENV<TERMINOLOGY> {
+                # As of version 1.13.0
+
                 $faint       = True;
                 $italic      = True;
                 $strike      = True;
@@ -417,7 +423,7 @@ sub terminal-env-detect() is export {
                 }
             }
             elsif $prog eq 'Apple_Terminal' {
-                # As of version 466
+                # As of version 470
 
                 $faint      = True;
                 $italic     = True;
@@ -449,6 +455,8 @@ sub terminal-env-detect() is export {
     }
     elsif $term eq 'alacritty' || %*ENV<ALACRITTY_WINDOW_ID> {
         # XXXX: Duplicated above into xtermish case for multiplexer recursion
+
+        # Version not detected
 
         # Alacritty sets COLORTERM=truecolor, detected above
         $terminal = 'Alacritty';
@@ -514,6 +522,8 @@ sub terminal-env-detect() is export {
         $color8bit   = True;
     }
     elsif $term eq 'st'|'st-256color' {
+        # Version not detected
+
         $terminal    = 'st';
 
         $faint       = True;
