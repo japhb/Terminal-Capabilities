@@ -1,6 +1,12 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Docs]
+  - Updated 'As of version' comments for several terminal autodetection blocks
+
+  [Features]
+  - Set narrow-emoji-needs-space=True for more tested terminal types
+
 
 0.0.18  2026-03-28T22:14:17-07:00
   [Docs]
