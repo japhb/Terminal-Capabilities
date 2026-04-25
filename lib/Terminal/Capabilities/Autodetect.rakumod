@@ -48,6 +48,7 @@ sub terminal-env-detect() is export {
     # Detect terminal multiplexers and recurse for underlying terminal
     if %*ENV<ZELLIJ>.defined {
         $terminal    = 'zellij';
+        $version     = '';
 
         # Zellij breaks these, regardless of underlying terminal
         $emoji-text  = False;
@@ -68,7 +69,7 @@ sub terminal-env-detect() is export {
     }
     elsif ?$term.starts-with('tmux') {
         $terminal   = 'tmux';
-        $version    = %*ENV<TERM_PROGRAM_VERSION>;
+        $version    = %*ENV<TERM_PROGRAM_VERSION> // '';
 
         # tmux breaks these, regardless of underlying terminal
         # XXXX: color24bit rarely *not* broken?
@@ -97,6 +98,7 @@ sub terminal-env-detect() is export {
     }
     elsif ?$term.starts-with('screen') {
         $terminal   = 'screen';
+        $version    = '';
 
         # Screen breaks these, regardless of underlying terminal
         # XXXX: 24-bit color is supposedly fixed in screen 5.0, but
@@ -194,7 +196,7 @@ sub terminal-env-detect() is export {
         elsif %*ENV<XTERM_VERSION> -> $v {
             # XTERM_VERSION was added in version 202 released in May 2005
             $terminal     = 'xterm';
-            $version      = $v.comb(/\d+/)[0] || 0;
+            $version      = $v.comb(/\d+/)[0] || '0';
 
             $faint        = True;
             $italic       = True;
@@ -414,7 +416,7 @@ sub terminal-env-detect() is export {
 
                 $colorbright  = True;
                 $color8bit    = True;
-                $color24bit ||= ($version // '').split('.')[0] >= 3;
+                $color24bit ||= $version.split('.')[0] >= 3;
 
                 if $has-utf8 {
                     $braille     = True;
@@ -507,7 +509,7 @@ sub terminal-env-detect() is export {
     elsif $term eq 'mlterm' {
         # mlterm sets COLORTERM=truecolor, detected above
         $terminal   = $term;
-        $version    = %*ENV<MLTERM>;
+        $version    = %*ENV<MLTERM> // '';
 
         $italic     = True;
         $strike     = True;
@@ -587,5 +589,5 @@ sub terminal-env-detect() is export {
         :$sep-quadrants, :$sep-sextants,
         :$narrow-emoji-needs-space;
 
-    ($caps, $terminal, $version)
+    ($caps, $terminal // '', $version // '')
 }

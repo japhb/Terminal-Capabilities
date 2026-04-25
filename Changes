@@ -1,6 +1,10 @@
 Revision history for Terminal-Capabilities
 
 {{$NEXT}}
+  [Bug fixes]
+  - Prevent crash on autodetection cases that would previously cause an
+    assignment type mismatch
+
 
 0.0.19  2026-04-15T18:21:59-07:00
   [Docs]
